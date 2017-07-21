@@ -335,48 +335,58 @@
 		B1AAD3001D0880AE002DAB84 /* AnswerUnits.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAD2FF1D0880AE002DAB84 /* AnswerUnits.swift */; };
 		B1AAD3021D0881BC002DAB84 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAD3011D0881BC002DAB84 /* Content.swift */; };
 		BE1733921D1FE60C003E8966 /* thomas.png in Resources */ = {isa = PBXBuildFile; fileRef = BE1733901D1FE557003E8966 /* thomas.png */; };
-		CA640F001EEDF55600EC9435 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EDF1EEDF55600EC9435 /* Context.swift */; };
-		CA640F011EEDF55600EC9435 /* CounterexampleCollectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EE01EEDF55600EC9435 /* CounterexampleCollectionResponse.swift */; };
-		CA640F021EEDF55600EC9435 /* CreateDialogNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EE11EEDF55600EC9435 /* CreateDialogNode.swift */; };
-		CA640F031EEDF55600EC9435 /* CreateEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EE21EEDF55600EC9435 /* CreateEntity.swift */; };
-		CA640F041EEDF55600EC9435 /* CreateSynonym.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EE31EEDF55600EC9435 /* CreateSynonym.swift */; };
-		CA640F051EEDF55600EC9435 /* CreateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EE41EEDF55600EC9435 /* CreateValue.swift */; };
-		CA640F061EEDF55600EC9435 /* CreateWorkspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EE51EEDF55600EC9435 /* CreateWorkspace.swift */; };
-		CA640F071EEDF55600EC9435 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EE61EEDF55600EC9435 /* Entity.swift */; };
-		CA640F081EEDF55600EC9435 /* EntityCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EE71EEDF55600EC9435 /* EntityCollection.swift */; };
-		CA640F091EEDF55600EC9435 /* EntityExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EE81EEDF55600EC9435 /* EntityExport.swift */; };
-		CA640F0A1EEDF55600EC9435 /* EntityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EE91EEDF55600EC9435 /* EntityResponse.swift */; };
-		CA640F0B1EEDF55600EC9435 /* ExampleCollectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EEA1EEDF55600EC9435 /* ExampleCollectionResponse.swift */; };
-		CA640F0C1EEDF55600EC9435 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EEB1EEDF55600EC9435 /* Input.swift */; };
-		CA640F0D1EEDF55600EC9435 /* Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EEC1EEDF55600EC9435 /* Intent.swift */; };
-		CA640F0E1EEDF55600EC9435 /* IntentCollectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EED1EEDF55600EC9435 /* IntentCollectionResponse.swift */; };
-		CA640F0F1EEDF55600EC9435 /* IntentExportResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EEE1EEDF55600EC9435 /* IntentExportResponse.swift */; };
-		CA640F101EEDF55600EC9435 /* LogCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EEF1EEDF55600EC9435 /* LogCollection.swift */; };
-		CA640F111EEDF55600EC9435 /* LogExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF01EEDF55600EC9435 /* LogExport.swift */; };
-		CA640F121EEDF55600EC9435 /* LogPagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF11EEDF55600EC9435 /* LogPagination.swift */; };
-		CA640F131EEDF55600EC9435 /* MessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF21EEDF55600EC9435 /* MessageRequest.swift */; };
-		CA640F141EEDF55600EC9435 /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF31EEDF55600EC9435 /* MessageResponse.swift */; };
-		CA640F151EEDF55600EC9435 /* Output.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF41EEDF55600EC9435 /* Output.swift */; };
-		CA640F161EEDF55600EC9435 /* SynonymCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF51EEDF55600EC9435 /* SynonymCollection.swift */; };
-		CA640F171EEDF55600EC9435 /* Synonym.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF61EEDF55600EC9435 /* Synonym.swift */; };
-		CA640F181EEDF55600EC9435 /* UpdateEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF71EEDF55600EC9435 /* UpdateEntity.swift */; };
-		CA640F191EEDF55600EC9435 /* UpdateSynonym.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF81EEDF55600EC9435 /* UpdateSynonym.swift */; };
-		CA640F1A1EEDF55600EC9435 /* UpdateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EF91EEDF55600EC9435 /* UpdateValue.swift */; };
-		CA640F1B1EEDF55600EC9435 /* UpdateWorkspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EFA1EEDF55600EC9435 /* UpdateWorkspace.swift */; };
-		CA640F1C1EEDF55600EC9435 /* ValueCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EFB1EEDF55600EC9435 /* ValueCollection.swift */; };
-		CA640F1D1EEDF55600EC9435 /* ValueExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EFC1EEDF55600EC9435 /* ValueExport.swift */; };
-		CA640F1E1EEDF55600EC9435 /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EFD1EEDF55600EC9435 /* Value.swift */; };
-		CA640F1F1EEDF55600EC9435 /* WorkspaceCollectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EFE1EEDF55600EC9435 /* WorkspaceCollectionResponse.swift */; };
-		CA640F201EEDF55600EC9435 /* WorkspaceExportResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640EFF1EEDF55600EC9435 /* WorkspaceExportResponse.swift */; };
-		CA640F251EEE00A900EC9435 /* ExampleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640F231EEE008800EC9435 /* ExampleResponse.swift */; };
-		CA640F261EEE00B200EC9435 /* PaginationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640F211EEE006500EC9435 /* PaginationResponse.swift */; };
-		CA640F2B1EEE00F200EC9435 /* CreateExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640F271EEE00E100EC9435 /* CreateExample.swift */; };
-		CA640F2C1EEE00F200EC9435 /* CreateIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640F281EEE00E100EC9435 /* CreateIntent.swift */; };
-		CA640F5A1EEE016700EC9435 /* IntentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640F2D1EEE012300EC9435 /* IntentResponse.swift */; };
-		CA640F5B1EEE016700EC9435 /* UpdateExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640F2E1EEE012300EC9435 /* UpdateExample.swift */; };
-		CA640F5C1EEE016700EC9435 /* UpdateIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640F2F1EEE012300EC9435 /* UpdateIntent.swift */; };
-		CA640F5D1EEE016700EC9435 /* WorkspaceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA640F301EEE012300EC9435 /* WorkspaceResponse.swift */; };
-		CA6410D21F054B7200EC9435 /* UpdateCounterexample.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6410D11F054B7200EC9435 /* UpdateCounterexample.swift */; };
+		CA9196F01F227585006E77CF /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196BC1F227585006E77CF /* Context.swift */; };
+		CA9196F11F227585006E77CF /* Counterexample.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196BD1F227585006E77CF /* Counterexample.swift */; };
+		CA9196F21F227585006E77CF /* CounterexampleCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196BE1F227585006E77CF /* CounterexampleCollection.swift */; };
+		CA9196F31F227585006E77CF /* CreateCounterexample.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196BF1F227585006E77CF /* CreateCounterexample.swift */; };
+		CA9196F41F227585006E77CF /* CreateDialogNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196C01F227585006E77CF /* CreateDialogNode.swift */; };
+		CA9196F51F227585006E77CF /* CreateEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196C11F227585006E77CF /* CreateEntity.swift */; };
+		CA9196F61F227585006E77CF /* CreateExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196C21F227585006E77CF /* CreateExample.swift */; };
+		CA9196F71F227585006E77CF /* CreateIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196C31F227585006E77CF /* CreateIntent.swift */; };
+		CA9196F81F227585006E77CF /* CreateSynonym.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196C41F227585006E77CF /* CreateSynonym.swift */; };
+		CA9196F91F227585006E77CF /* CreateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196C51F227585006E77CF /* CreateValue.swift */; };
+		CA9196FA1F227585006E77CF /* CreateWorkspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196C61F227585006E77CF /* CreateWorkspace.swift */; };
+		CA9196FB1F227585006E77CF /* DialogNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196C71F227585006E77CF /* DialogNode.swift */; };
+		CA9196FC1F227585006E77CF /* DialogNodeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196C81F227585006E77CF /* DialogNodeAction.swift */; };
+		CA9196FD1F227585006E77CF /* DialogNodeCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196C91F227585006E77CF /* DialogNodeCollection.swift */; };
+		CA9196FE1F227585006E77CF /* DialogNodeNextStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196CA1F227585006E77CF /* DialogNodeNextStep.swift */; };
+		CA9196FF1F227585006E77CF /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196CB1F227585006E77CF /* Entity.swift */; };
+		CA9197001F227585006E77CF /* EntityCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196CC1F227585006E77CF /* EntityCollection.swift */; };
+		CA9197011F227585006E77CF /* EntityExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196CD1F227585006E77CF /* EntityExport.swift */; };
+		CA9197021F227585006E77CF /* Example.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196CE1F227585006E77CF /* Example.swift */; };
+		CA9197031F227585006E77CF /* ExampleCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196CF1F227585006E77CF /* ExampleCollection.swift */; };
+		CA9197041F227585006E77CF /* InputData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196D01F227585006E77CF /* InputData.swift */; };
+		CA9197051F227585006E77CF /* Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196D11F227585006E77CF /* Intent.swift */; };
+		CA9197061F227585006E77CF /* IntentCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196D21F227585006E77CF /* IntentCollection.swift */; };
+		CA9197071F227585006E77CF /* IntentExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196D31F227585006E77CF /* IntentExport.swift */; };
+		CA9197081F227585006E77CF /* LogCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196D41F227585006E77CF /* LogCollection.swift */; };
+		CA9197091F227585006E77CF /* LogExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196D51F227585006E77CF /* LogExport.swift */; };
+		CA91970A1F227585006E77CF /* LogMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196D61F227585006E77CF /* LogMessage.swift */; };
+		CA91970B1F227585006E77CF /* LogPagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196D71F227585006E77CF /* LogPagination.swift */; };
+		CA91970C1F227585006E77CF /* MessageInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196D81F227585006E77CF /* MessageInput.swift */; };
+		CA91970D1F227585006E77CF /* MessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196D91F227585006E77CF /* MessageRequest.swift */; };
+		CA91970E1F227585006E77CF /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196DA1F227585006E77CF /* MessageResponse.swift */; };
+		CA91970F1F227585006E77CF /* OutputData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196DB1F227585006E77CF /* OutputData.swift */; };
+		CA9197101F227585006E77CF /* Pagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196DC1F227585006E77CF /* Pagination.swift */; };
+		CA9197111F227585006E77CF /* RuntimeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196DD1F227585006E77CF /* RuntimeEntity.swift */; };
+		CA9197121F227585006E77CF /* RuntimeIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196DE1F227585006E77CF /* RuntimeIntent.swift */; };
+		CA9197131F227585006E77CF /* Synonym.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196DF1F227585006E77CF /* Synonym.swift */; };
+		CA9197141F227585006E77CF /* SynonymCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196E01F227585006E77CF /* SynonymCollection.swift */; };
+		CA9197151F227585006E77CF /* SystemResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196E11F227585006E77CF /* SystemResponse.swift */; };
+		CA9197161F227585006E77CF /* UpdateCounterexample.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196E21F227585006E77CF /* UpdateCounterexample.swift */; };
+		CA9197171F227585006E77CF /* UpdateDialogNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196E31F227585006E77CF /* UpdateDialogNode.swift */; };
+		CA9197181F227585006E77CF /* UpdateEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196E41F227585006E77CF /* UpdateEntity.swift */; };
+		CA9197191F227585006E77CF /* UpdateExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196E51F227585006E77CF /* UpdateExample.swift */; };
+		CA91971A1F227585006E77CF /* UpdateIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196E61F227585006E77CF /* UpdateIntent.swift */; };
+		CA91971B1F227585006E77CF /* UpdateSynonym.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196E71F227585006E77CF /* UpdateSynonym.swift */; };
+		CA91971C1F227585006E77CF /* UpdateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196E81F227585006E77CF /* UpdateValue.swift */; };
+		CA91971D1F227585006E77CF /* UpdateWorkspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196E91F227585006E77CF /* UpdateWorkspace.swift */; };
+		CA91971E1F227585006E77CF /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196EA1F227585006E77CF /* Value.swift */; };
+		CA91971F1F227585006E77CF /* ValueCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196EB1F227585006E77CF /* ValueCollection.swift */; };
+		CA9197201F227585006E77CF /* ValueExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196EC1F227585006E77CF /* ValueExport.swift */; };
+		CA9197211F227585006E77CF /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196ED1F227585006E77CF /* Workspace.swift */; };
+		CA9197221F227585006E77CF /* WorkspaceCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196EE1F227585006E77CF /* WorkspaceCollection.swift */; };
+		CA9197231F227585006E77CF /* WorkspaceExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA9196EF1F227585006E77CF /* WorkspaceExport.swift */; };
 		CE3AC72F1E0450BA00543AA9 /* Relation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AC72E1E0450BA00543AA9 /* Relation.swift */; };
 		CE3AC7311E045CBA00543AA9 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AC7301E045CBA00543AA9 /* Entity.swift */; };
 		CE5DA8421DEC961400736D31 /* CollectionImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5DA8411DEC961400736D31 /* CollectionImages.swift */; };
@@ -1016,48 +1026,58 @@
 		B1F21DF71CE2461800393146 /* ToneAnalyzerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneAnalyzerTests.swift; sourceTree = "<group>"; };
 		B1F21DF81CE2461800393146 /* ToneAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneAnalyzer.swift; sourceTree = "<group>"; };
 		BE1733901D1FE557003E8966 /* thomas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thomas.png; sourceTree = "<group>"; };
-		CA640EDF1EEDF55600EC9435 /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
-		CA640EE01EEDF55600EC9435 /* CounterexampleCollectionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterexampleCollectionResponse.swift; sourceTree = "<group>"; };
-		CA640EE11EEDF55600EC9435 /* CreateDialogNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateDialogNode.swift; sourceTree = "<group>"; };
-		CA640EE21EEDF55600EC9435 /* CreateEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEntity.swift; sourceTree = "<group>"; };
-		CA640EE31EEDF55600EC9435 /* CreateSynonym.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateSynonym.swift; sourceTree = "<group>"; };
-		CA640EE41EEDF55600EC9435 /* CreateValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateValue.swift; sourceTree = "<group>"; };
-		CA640EE51EEDF55600EC9435 /* CreateWorkspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateWorkspace.swift; sourceTree = "<group>"; };
-		CA640EE61EEDF55600EC9435 /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
-		CA640EE71EEDF55600EC9435 /* EntityCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityCollection.swift; sourceTree = "<group>"; };
-		CA640EE81EEDF55600EC9435 /* EntityExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityExport.swift; sourceTree = "<group>"; };
-		CA640EE91EEDF55600EC9435 /* EntityResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityResponse.swift; sourceTree = "<group>"; };
-		CA640EEA1EEDF55600EC9435 /* ExampleCollectionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleCollectionResponse.swift; sourceTree = "<group>"; };
-		CA640EEB1EEDF55600EC9435 /* Input.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
-		CA640EEC1EEDF55600EC9435 /* Intent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Intent.swift; sourceTree = "<group>"; };
-		CA640EED1EEDF55600EC9435 /* IntentCollectionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntentCollectionResponse.swift; sourceTree = "<group>"; };
-		CA640EEE1EEDF55600EC9435 /* IntentExportResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntentExportResponse.swift; sourceTree = "<group>"; };
-		CA640EEF1EEDF55600EC9435 /* LogCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogCollection.swift; sourceTree = "<group>"; };
-		CA640EF01EEDF55600EC9435 /* LogExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogExport.swift; sourceTree = "<group>"; };
-		CA640EF11EEDF55600EC9435 /* LogPagination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogPagination.swift; sourceTree = "<group>"; };
-		CA640EF21EEDF55600EC9435 /* MessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRequest.swift; sourceTree = "<group>"; };
-		CA640EF31EEDF55600EC9435 /* MessageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
-		CA640EF41EEDF55600EC9435 /* Output.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Output.swift; sourceTree = "<group>"; };
-		CA640EF51EEDF55600EC9435 /* SynonymCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynonymCollection.swift; sourceTree = "<group>"; };
-		CA640EF61EEDF55600EC9435 /* Synonym.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Synonym.swift; sourceTree = "<group>"; };
-		CA640EF71EEDF55600EC9435 /* UpdateEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateEntity.swift; sourceTree = "<group>"; };
-		CA640EF81EEDF55600EC9435 /* UpdateSynonym.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateSynonym.swift; sourceTree = "<group>"; };
-		CA640EF91EEDF55600EC9435 /* UpdateValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateValue.swift; sourceTree = "<group>"; };
-		CA640EFA1EEDF55600EC9435 /* UpdateWorkspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateWorkspace.swift; sourceTree = "<group>"; };
-		CA640EFB1EEDF55600EC9435 /* ValueCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueCollection.swift; sourceTree = "<group>"; };
-		CA640EFC1EEDF55600EC9435 /* ValueExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueExport.swift; sourceTree = "<group>"; };
-		CA640EFD1EEDF55600EC9435 /* Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
-		CA640EFE1EEDF55600EC9435 /* WorkspaceCollectionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceCollectionResponse.swift; sourceTree = "<group>"; };
-		CA640EFF1EEDF55600EC9435 /* WorkspaceExportResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceExportResponse.swift; sourceTree = "<group>"; };
-		CA640F211EEE006500EC9435 /* PaginationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationResponse.swift; sourceTree = "<group>"; };
-		CA640F231EEE008800EC9435 /* ExampleResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleResponse.swift; sourceTree = "<group>"; };
-		CA640F271EEE00E100EC9435 /* CreateExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateExample.swift; sourceTree = "<group>"; };
-		CA640F281EEE00E100EC9435 /* CreateIntent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateIntent.swift; sourceTree = "<group>"; };
-		CA640F2D1EEE012300EC9435 /* IntentResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntentResponse.swift; sourceTree = "<group>"; };
-		CA640F2E1EEE012300EC9435 /* UpdateExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateExample.swift; sourceTree = "<group>"; };
-		CA640F2F1EEE012300EC9435 /* UpdateIntent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateIntent.swift; sourceTree = "<group>"; };
-		CA640F301EEE012300EC9435 /* WorkspaceResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceResponse.swift; sourceTree = "<group>"; };
-		CA6410D11F054B7200EC9435 /* UpdateCounterexample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateCounterexample.swift; sourceTree = "<group>"; };
+		CA9196BC1F227585006E77CF /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
+		CA9196BD1F227585006E77CF /* Counterexample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Counterexample.swift; sourceTree = "<group>"; };
+		CA9196BE1F227585006E77CF /* CounterexampleCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterexampleCollection.swift; sourceTree = "<group>"; };
+		CA9196BF1F227585006E77CF /* CreateCounterexample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateCounterexample.swift; sourceTree = "<group>"; };
+		CA9196C01F227585006E77CF /* CreateDialogNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateDialogNode.swift; sourceTree = "<group>"; };
+		CA9196C11F227585006E77CF /* CreateEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEntity.swift; sourceTree = "<group>"; };
+		CA9196C21F227585006E77CF /* CreateExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateExample.swift; sourceTree = "<group>"; };
+		CA9196C31F227585006E77CF /* CreateIntent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateIntent.swift; sourceTree = "<group>"; };
+		CA9196C41F227585006E77CF /* CreateSynonym.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateSynonym.swift; sourceTree = "<group>"; };
+		CA9196C51F227585006E77CF /* CreateValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateValue.swift; sourceTree = "<group>"; };
+		CA9196C61F227585006E77CF /* CreateWorkspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateWorkspace.swift; sourceTree = "<group>"; };
+		CA9196C71F227585006E77CF /* DialogNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNode.swift; sourceTree = "<group>"; };
+		CA9196C81F227585006E77CF /* DialogNodeAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodeAction.swift; sourceTree = "<group>"; };
+		CA9196C91F227585006E77CF /* DialogNodeCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodeCollection.swift; sourceTree = "<group>"; };
+		CA9196CA1F227585006E77CF /* DialogNodeNextStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodeNextStep.swift; sourceTree = "<group>"; };
+		CA9196CB1F227585006E77CF /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		CA9196CC1F227585006E77CF /* EntityCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityCollection.swift; sourceTree = "<group>"; };
+		CA9196CD1F227585006E77CF /* EntityExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityExport.swift; sourceTree = "<group>"; };
+		CA9196CE1F227585006E77CF /* Example.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Example.swift; sourceTree = "<group>"; };
+		CA9196CF1F227585006E77CF /* ExampleCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleCollection.swift; sourceTree = "<group>"; };
+		CA9196D01F227585006E77CF /* InputData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputData.swift; sourceTree = "<group>"; };
+		CA9196D11F227585006E77CF /* Intent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Intent.swift; sourceTree = "<group>"; };
+		CA9196D21F227585006E77CF /* IntentCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntentCollection.swift; sourceTree = "<group>"; };
+		CA9196D31F227585006E77CF /* IntentExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntentExport.swift; sourceTree = "<group>"; };
+		CA9196D41F227585006E77CF /* LogCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogCollection.swift; sourceTree = "<group>"; };
+		CA9196D51F227585006E77CF /* LogExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogExport.swift; sourceTree = "<group>"; };
+		CA9196D61F227585006E77CF /* LogMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogMessage.swift; sourceTree = "<group>"; };
+		CA9196D71F227585006E77CF /* LogPagination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogPagination.swift; sourceTree = "<group>"; };
+		CA9196D81F227585006E77CF /* MessageInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageInput.swift; sourceTree = "<group>"; };
+		CA9196D91F227585006E77CF /* MessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRequest.swift; sourceTree = "<group>"; };
+		CA9196DA1F227585006E77CF /* MessageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
+		CA9196DB1F227585006E77CF /* OutputData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutputData.swift; sourceTree = "<group>"; };
+		CA9196DC1F227585006E77CF /* Pagination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pagination.swift; sourceTree = "<group>"; };
+		CA9196DD1F227585006E77CF /* RuntimeEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeEntity.swift; sourceTree = "<group>"; };
+		CA9196DE1F227585006E77CF /* RuntimeIntent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeIntent.swift; sourceTree = "<group>"; };
+		CA9196DF1F227585006E77CF /* Synonym.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Synonym.swift; sourceTree = "<group>"; };
+		CA9196E01F227585006E77CF /* SynonymCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SynonymCollection.swift; sourceTree = "<group>"; };
+		CA9196E11F227585006E77CF /* SystemResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemResponse.swift; sourceTree = "<group>"; };
+		CA9196E21F227585006E77CF /* UpdateCounterexample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateCounterexample.swift; sourceTree = "<group>"; };
+		CA9196E31F227585006E77CF /* UpdateDialogNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateDialogNode.swift; sourceTree = "<group>"; };
+		CA9196E41F227585006E77CF /* UpdateEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateEntity.swift; sourceTree = "<group>"; };
+		CA9196E51F227585006E77CF /* UpdateExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateExample.swift; sourceTree = "<group>"; };
+		CA9196E61F227585006E77CF /* UpdateIntent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateIntent.swift; sourceTree = "<group>"; };
+		CA9196E71F227585006E77CF /* UpdateSynonym.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateSynonym.swift; sourceTree = "<group>"; };
+		CA9196E81F227585006E77CF /* UpdateValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateValue.swift; sourceTree = "<group>"; };
+		CA9196E91F227585006E77CF /* UpdateWorkspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateWorkspace.swift; sourceTree = "<group>"; };
+		CA9196EA1F227585006E77CF /* Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
+		CA9196EB1F227585006E77CF /* ValueCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueCollection.swift; sourceTree = "<group>"; };
+		CA9196EC1F227585006E77CF /* ValueExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueExport.swift; sourceTree = "<group>"; };
+		CA9196ED1F227585006E77CF /* Workspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workspace.swift; sourceTree = "<group>"; };
+		CA9196EE1F227585006E77CF /* WorkspaceCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceCollection.swift; sourceTree = "<group>"; };
+		CA9196EF1F227585006E77CF /* WorkspaceExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceExport.swift; sourceTree = "<group>"; };
 		CE2D64531DC7B114001E23ED /* arsArticle.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = arsArticle.html; sourceTree = "<group>"; };
 		CE2D64541DC7B114001E23ED /* car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = car.png; sourceTree = "<group>"; };
 		CE2D64551DC7B114001E23ED /* DocumentConversionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentConversionTests.swift; sourceTree = "<group>"; };
@@ -2247,48 +2267,58 @@
 		7AB4451A1D3E643B00E8748A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CA640EDF1EEDF55600EC9435 /* Context.swift */,
-				CA640EE01EEDF55600EC9435 /* CounterexampleCollectionResponse.swift */,
-				CA640EE11EEDF55600EC9435 /* CreateDialogNode.swift */,
-				CA640EE21EEDF55600EC9435 /* CreateEntity.swift */,
-				CA640F271EEE00E100EC9435 /* CreateExample.swift */,
-				CA640F281EEE00E100EC9435 /* CreateIntent.swift */,
-				CA640EE31EEDF55600EC9435 /* CreateSynonym.swift */,
-				CA640EE41EEDF55600EC9435 /* CreateValue.swift */,
-				CA640EE51EEDF55600EC9435 /* CreateWorkspace.swift */,
-				CA640EE61EEDF55600EC9435 /* Entity.swift */,
-				CA640EE71EEDF55600EC9435 /* EntityCollection.swift */,
-				CA640EE81EEDF55600EC9435 /* EntityExport.swift */,
-				CA640EE91EEDF55600EC9435 /* EntityResponse.swift */,
-				CA640EEA1EEDF55600EC9435 /* ExampleCollectionResponse.swift */,
-				CA640F231EEE008800EC9435 /* ExampleResponse.swift */,
-				CA640EEB1EEDF55600EC9435 /* Input.swift */,
-				CA640EEC1EEDF55600EC9435 /* Intent.swift */,
-				CA640EED1EEDF55600EC9435 /* IntentCollectionResponse.swift */,
-				CA640EEE1EEDF55600EC9435 /* IntentExportResponse.swift */,
-				CA640F2D1EEE012300EC9435 /* IntentResponse.swift */,
-				CA640EEF1EEDF55600EC9435 /* LogCollection.swift */,
-				CA640EF01EEDF55600EC9435 /* LogExport.swift */,
-				CA640EF11EEDF55600EC9435 /* LogPagination.swift */,
-				CA640EF21EEDF55600EC9435 /* MessageRequest.swift */,
-				CA640EF31EEDF55600EC9435 /* MessageResponse.swift */,
-				CA640EF41EEDF55600EC9435 /* Output.swift */,
-				CA640F211EEE006500EC9435 /* PaginationResponse.swift */,
-				CA640EF51EEDF55600EC9435 /* SynonymCollection.swift */,
-				CA640EF61EEDF55600EC9435 /* Synonym.swift */,
-				CA6410D11F054B7200EC9435 /* UpdateCounterexample.swift */,
-				CA640EF71EEDF55600EC9435 /* UpdateEntity.swift */,
-				CA640F2E1EEE012300EC9435 /* UpdateExample.swift */,
-				CA640F2F1EEE012300EC9435 /* UpdateIntent.swift */,
-				CA640EF81EEDF55600EC9435 /* UpdateSynonym.swift */,
-				CA640EF91EEDF55600EC9435 /* UpdateValue.swift */,
-				CA640EFA1EEDF55600EC9435 /* UpdateWorkspace.swift */,
-				CA640EFB1EEDF55600EC9435 /* ValueCollection.swift */,
-				CA640EFC1EEDF55600EC9435 /* ValueExport.swift */,
-				CA640EFD1EEDF55600EC9435 /* Value.swift */,
-				CA640EFE1EEDF55600EC9435 /* WorkspaceCollectionResponse.swift */,
-				CA640EFF1EEDF55600EC9435 /* WorkspaceExportResponse.swift */,
-				CA640F301EEE012300EC9435 /* WorkspaceResponse.swift */,
+				CA9196BC1F227585006E77CF /* Context.swift */,
+				CA9196BD1F227585006E77CF /* Counterexample.swift */,
+				CA9196BE1F227585006E77CF /* CounterexampleCollection.swift */,
+				CA9196BF1F227585006E77CF /* CreateCounterexample.swift */,
+				CA9196C01F227585006E77CF /* CreateDialogNode.swift */,
+				CA9196C11F227585006E77CF /* CreateEntity.swift */,
+				CA9196C21F227585006E77CF /* CreateExample.swift */,
+				CA9196C31F227585006E77CF /* CreateIntent.swift */,
+				CA9196C41F227585006E77CF /* CreateSynonym.swift */,
+				CA9196C51F227585006E77CF /* CreateValue.swift */,
+				CA9196C61F227585006E77CF /* CreateWorkspace.swift */,
+				CA9196C71F227585006E77CF /* DialogNode.swift */,
+				CA9196C81F227585006E77CF /* DialogNodeAction.swift */,
+				CA9196C91F227585006E77CF /* DialogNodeCollection.swift */,
+				CA9196CA1F227585006E77CF /* DialogNodeNextStep.swift */,
+				CA9196CB1F227585006E77CF /* Entity.swift */,
+				CA9196CC1F227585006E77CF /* EntityCollection.swift */,
+				CA9196CD1F227585006E77CF /* EntityExport.swift */,
+				CA9196CE1F227585006E77CF /* Example.swift */,
+				CA9196CF1F227585006E77CF /* ExampleCollection.swift */,
+				CA9196D01F227585006E77CF /* InputData.swift */,
+				CA9196D11F227585006E77CF /* Intent.swift */,
+				CA9196D21F227585006E77CF /* IntentCollection.swift */,
+				CA9196D31F227585006E77CF /* IntentExport.swift */,
+				CA9196D41F227585006E77CF /* LogCollection.swift */,
+				CA9196D51F227585006E77CF /* LogExport.swift */,
+				CA9196D61F227585006E77CF /* LogMessage.swift */,
+				CA9196D71F227585006E77CF /* LogPagination.swift */,
+				CA9196D81F227585006E77CF /* MessageInput.swift */,
+				CA9196D91F227585006E77CF /* MessageRequest.swift */,
+				CA9196DA1F227585006E77CF /* MessageResponse.swift */,
+				CA9196DB1F227585006E77CF /* OutputData.swift */,
+				CA9196DC1F227585006E77CF /* Pagination.swift */,
+				CA9196DD1F227585006E77CF /* RuntimeEntity.swift */,
+				CA9196DE1F227585006E77CF /* RuntimeIntent.swift */,
+				CA9196DF1F227585006E77CF /* Synonym.swift */,
+				CA9196E01F227585006E77CF /* SynonymCollection.swift */,
+				CA9196E11F227585006E77CF /* SystemResponse.swift */,
+				CA9196E21F227585006E77CF /* UpdateCounterexample.swift */,
+				CA9196E31F227585006E77CF /* UpdateDialogNode.swift */,
+				CA9196E41F227585006E77CF /* UpdateEntity.swift */,
+				CA9196E51F227585006E77CF /* UpdateExample.swift */,
+				CA9196E61F227585006E77CF /* UpdateIntent.swift */,
+				CA9196E71F227585006E77CF /* UpdateSynonym.swift */,
+				CA9196E81F227585006E77CF /* UpdateValue.swift */,
+				CA9196E91F227585006E77CF /* UpdateWorkspace.swift */,
+				CA9196EA1F227585006E77CF /* Value.swift */,
+				CA9196EB1F227585006E77CF /* ValueCollection.swift */,
+				CA9196EC1F227585006E77CF /* ValueExport.swift */,
+				CA9196ED1F227585006E77CF /* Workspace.swift */,
+				CA9196EE1F227585006E77CF /* WorkspaceCollection.swift */,
+				CA9196EF1F227585006E77CF /* WorkspaceExport.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -4397,49 +4427,59 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA640F0C1EEDF55600EC9435 /* Input.swift in Sources */,
-				CA640F181EEDF55600EC9435 /* UpdateEntity.swift in Sources */,
-				CA640F2B1EEE00F200EC9435 /* CreateExample.swift in Sources */,
+				CA9197011F227585006E77CF /* EntityExport.swift in Sources */,
+				CA91971D1F227585006E77CF /* UpdateWorkspace.swift in Sources */,
+				CA9197141F227585006E77CF /* SynonymCollection.swift in Sources */,
+				CA9197111F227585006E77CF /* RuntimeEntity.swift in Sources */,
 				7AB445411D3E657900E8748A /* Conversation.swift in Sources */,
-				CA640F5C1EEE016700EC9435 /* UpdateIntent.swift in Sources */,
-				CA640F161EEDF55600EC9435 /* SynonymCollection.swift in Sources */,
-				CA640F041EEDF55600EC9435 /* CreateSynonym.swift in Sources */,
-				CA640F001EEDF55600EC9435 /* Context.swift in Sources */,
-				CA640F2C1EEE00F200EC9435 /* CreateIntent.swift in Sources */,
-				CA640F081EEDF55600EC9435 /* EntityCollection.swift in Sources */,
-				CA640F091EEDF55600EC9435 /* EntityExport.swift in Sources */,
-				CA640F131EEDF55600EC9435 /* MessageRequest.swift in Sources */,
-				CA640F0E1EEDF55600EC9435 /* IntentCollectionResponse.swift in Sources */,
-				CA640F141EEDF55600EC9435 /* MessageResponse.swift in Sources */,
-				CA640F061EEDF55600EC9435 /* CreateWorkspace.swift in Sources */,
-				CA640F1C1EEDF55600EC9435 /* ValueCollection.swift in Sources */,
-				CA640F031EEDF55600EC9435 /* CreateEntity.swift in Sources */,
-				CA640F5A1EEE016700EC9435 /* IntentResponse.swift in Sources */,
-				CA640F0B1EEDF55600EC9435 /* ExampleCollectionResponse.swift in Sources */,
-				CA640F1D1EEDF55600EC9435 /* ValueExport.swift in Sources */,
-				CA640F201EEDF55600EC9435 /* WorkspaceExportResponse.swift in Sources */,
-				CA640F0A1EEDF55600EC9435 /* EntityResponse.swift in Sources */,
-				CA640F191EEDF55600EC9435 /* UpdateSynonym.swift in Sources */,
-				CA640F071EEDF55600EC9435 /* Entity.swift in Sources */,
-				CA640F261EEE00B200EC9435 /* PaginationResponse.swift in Sources */,
-				CA640F251EEE00A900EC9435 /* ExampleResponse.swift in Sources */,
-				CA640F151EEDF55600EC9435 /* Output.swift in Sources */,
-				CA640F0D1EEDF55600EC9435 /* Intent.swift in Sources */,
-				CA640F101EEDF55600EC9435 /* LogCollection.swift in Sources */,
-				CA640F1F1EEDF55600EC9435 /* WorkspaceCollectionResponse.swift in Sources */,
-				CA640F111EEDF55600EC9435 /* LogExport.swift in Sources */,
-				CA640F011EEDF55600EC9435 /* CounterexampleCollectionResponse.swift in Sources */,
-				CA640F0F1EEDF55600EC9435 /* IntentExportResponse.swift in Sources */,
-				CA640F121EEDF55600EC9435 /* LogPagination.swift in Sources */,
-				CA640F1E1EEDF55600EC9435 /* Value.swift in Sources */,
-				CA640F1B1EEDF55600EC9435 /* UpdateWorkspace.swift in Sources */,
-				CA640F1A1EEDF55600EC9435 /* UpdateValue.swift in Sources */,
-				CA640F171EEDF55600EC9435 /* Synonym.swift in Sources */,
-				CA640F5B1EEE016700EC9435 /* UpdateExample.swift in Sources */,
-				CA640F021EEDF55600EC9435 /* CreateDialogNode.swift in Sources */,
-				CA640F5D1EEE016700EC9435 /* WorkspaceResponse.swift in Sources */,
-				CA6410D21F054B7200EC9435 /* UpdateCounterexample.swift in Sources */,
-				CA640F051EEDF55600EC9435 /* CreateValue.swift in Sources */,
+				CA9196FD1F227585006E77CF /* DialogNodeCollection.swift in Sources */,
+				CA9197101F227585006E77CF /* Pagination.swift in Sources */,
+				CA9197221F227585006E77CF /* WorkspaceCollection.swift in Sources */,
+				CA91971B1F227585006E77CF /* UpdateSynonym.swift in Sources */,
+				CA9197151F227585006E77CF /* SystemResponse.swift in Sources */,
+				CA9196FC1F227585006E77CF /* DialogNodeAction.swift in Sources */,
+				CA91970E1F227585006E77CF /* MessageResponse.swift in Sources */,
+				CA91970C1F227585006E77CF /* MessageInput.swift in Sources */,
+				CA9197091F227585006E77CF /* LogExport.swift in Sources */,
+				CA91970B1F227585006E77CF /* LogPagination.swift in Sources */,
+				CA91971F1F227585006E77CF /* ValueCollection.swift in Sources */,
+				CA9197211F227585006E77CF /* Workspace.swift in Sources */,
+				CA91970D1F227585006E77CF /* MessageRequest.swift in Sources */,
+				CA9197021F227585006E77CF /* Example.swift in Sources */,
+				CA91971A1F227585006E77CF /* UpdateIntent.swift in Sources */,
+				CA9197231F227585006E77CF /* WorkspaceExport.swift in Sources */,
+				CA91970A1F227585006E77CF /* LogMessage.swift in Sources */,
+				CA9196F41F227585006E77CF /* CreateDialogNode.swift in Sources */,
+				CA9196FE1F227585006E77CF /* DialogNodeNextStep.swift in Sources */,
+				CA9196F51F227585006E77CF /* CreateEntity.swift in Sources */,
+				CA9196F81F227585006E77CF /* CreateSynonym.swift in Sources */,
+				CA9197201F227585006E77CF /* ValueExport.swift in Sources */,
+				CA9196FF1F227585006E77CF /* Entity.swift in Sources */,
+				CA9196FB1F227585006E77CF /* DialogNode.swift in Sources */,
+				CA9197031F227585006E77CF /* ExampleCollection.swift in Sources */,
+				CA9197191F227585006E77CF /* UpdateExample.swift in Sources */,
+				CA9196F91F227585006E77CF /* CreateValue.swift in Sources */,
+				CA9197171F227585006E77CF /* UpdateDialogNode.swift in Sources */,
+				CA9197001F227585006E77CF /* EntityCollection.swift in Sources */,
+				CA9196F31F227585006E77CF /* CreateCounterexample.swift in Sources */,
+				CA9196F21F227585006E77CF /* CounterexampleCollection.swift in Sources */,
+				CA9197181F227585006E77CF /* UpdateEntity.swift in Sources */,
+				CA9197121F227585006E77CF /* RuntimeIntent.swift in Sources */,
+				CA9197131F227585006E77CF /* Synonym.swift in Sources */,
+				CA9197081F227585006E77CF /* LogCollection.swift in Sources */,
+				CA91971E1F227585006E77CF /* Value.swift in Sources */,
+				CA9197041F227585006E77CF /* InputData.swift in Sources */,
+				CA9196F01F227585006E77CF /* Context.swift in Sources */,
+				CA9197051F227585006E77CF /* Intent.swift in Sources */,
+				CA9197071F227585006E77CF /* IntentExport.swift in Sources */,
+				CA91971C1F227585006E77CF /* UpdateValue.swift in Sources */,
+				CA9196F61F227585006E77CF /* CreateExample.swift in Sources */,
+				CA9196F11F227585006E77CF /* Counterexample.swift in Sources */,
+				CA91970F1F227585006E77CF /* OutputData.swift in Sources */,
+				CA9197161F227585006E77CF /* UpdateCounterexample.swift in Sources */,
+				CA9196F71F227585006E77CF /* CreateIntent.swift in Sources */,
+				CA9196FA1F227585006E77CF /* CreateWorkspace.swift in Sources */,
+				CA9197061F227585006E77CF /* IntentCollection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
