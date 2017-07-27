@@ -156,10 +156,11 @@ class ConversationTests: XCTestCase {
         let expectation2 = self.expectation(description: description2)
         
         let input = InputData(text: "Turn on the radio.")
+        let request = MessageRequest(input: input, context: context!)
         let response2 = ["", "Sure thing! Which genre would you prefer? Jazz is my personal favorite.."]
         let nodes2 = ["node_1_1467232431348", "node_2_1467232480480", "node_1_1467994455318"]
         
-        conversation.message(workspaceID: workspaceID, input: input, context: context!, failure: failWithError) {
+        conversation.message(workspaceID: workspaceID, request: request, failure: failWithError) {
             response in
             
             // verify input
@@ -218,7 +219,8 @@ class ConversationTests: XCTestCase {
         let expectation2 = expectation(description: description2)
         
         let input2 = InputData(text: "Turn on the radio.")
-        conversation.message(workspaceID: workspaceID, input: input2, context: context, entities: entities, intents: intents, output: output, failure: failWithError) {
+        let request2 = MessageRequest(input: input2, context: context, entities: entities, intents: intents, output: output)
+        conversation.message(workspaceID: workspaceID, request: request2, failure: failWithError) {
             response in
             
             // verify objects are non-nil
@@ -269,7 +271,8 @@ class ConversationTests: XCTestCase {
         let expectation2 = expectation(description: description2)
         
         let input2 = InputData(text: "Turn on the radio.")
-        conversation.message(workspaceID: workspaceID, input: input2, context: context, entities: entities, intents: intents, output: output, failure: failWithError) {
+        let request2 = MessageRequest(input: input2, context: context, entities: entities, intents: intents, output: output)
+        conversation.message(workspaceID: workspaceID, request: request2, failure: failWithError) {
             response in
             context = response.context
             entities = response.entities
@@ -283,7 +286,8 @@ class ConversationTests: XCTestCase {
         let expectation3 = expectation(description: description3)
         
         let input3 = InputData(text: "Rock music.")
-        conversation.message(workspaceID: workspaceID, input: input3, context: context, entities: entities, intents: intents, output: output, failure: failWithError) {
+        let request3 = MessageRequest(input: input3, context: context, entities: entities, intents: intents, output: output)
+        conversation.message(workspaceID: workspaceID, request: request3, failure: failWithError) {
             response in
             
             // verify objects are non-nil
@@ -330,7 +334,8 @@ class ConversationTests: XCTestCase {
         let expectation2 = expectation(description: description2)
         
         let input2 = InputData(text: "Turn on the radio.")
-        conversation.message(workspaceID: workspaceID, input: input2, context: context, failure: failWithError) {
+        let request2 = MessageRequest(input: input2, context: context)
+        conversation.message(workspaceID: workspaceID, request: request2, failure: failWithError) {
             response in
             let reprompt = response.context.json["reprompt"] as? Bool
             XCTAssertNotNil(reprompt)
@@ -422,7 +427,8 @@ class ConversationTests: XCTestCase {
         //let workspaceDialogNode = CreateDialogNode(dialogNode: "DialogNode1", description: "description of DialogNode1")
         let workspaceCounterexample = CreateCounterexample(text: "This is a counterexample")
         
-        conversation.createWorkspace(name: workspaceName, description: workspaceDescription, language: workspaceLanguage, intents: [workspaceIntent], entities: [workspaceEntity], dialogNodes: nil, counterexamples: [workspaceCounterexample],metadata: workspaceMetadata, failure: failWithError) { workspace in
+        let createWorkspaceBody = CreateWorkspace(name: workspaceName, description: workspaceDescription, language: workspaceLanguage, intents: [workspaceIntent], entities: [workspaceEntity], dialogNodes: nil, counterexamples: [workspaceCounterexample],metadata: workspaceMetadata)
+        conversation.createWorkspace(properties: createWorkspaceBody, failure: failWithError) { workspace in
             XCTAssertEqual(workspace.name, workspaceName)
             XCTAssertEqual(workspace.description, workspaceDescription)
             XCTAssertEqual(workspace.language, workspaceLanguage)
@@ -517,7 +523,8 @@ class ConversationTests: XCTestCase {
         let workspaceName = "swift-sdk-test-workspace"
         let workspaceDescription = "temporary workspace for the swift sdk unit tests"
         let workspaceLanguage = "en"
-        conversation.createWorkspace(name: workspaceName, description: workspaceDescription, language: workspaceLanguage, failure: failWithError) { workspace in
+        let createWorkspaceBody = CreateWorkspace(name: workspaceName, description: workspaceDescription, language: workspaceLanguage)
+        conversation.createWorkspace(properties: createWorkspaceBody, failure: failWithError) { workspace in
             XCTAssertEqual(workspace.name, workspaceName)
             XCTAssertEqual(workspace.description, workspaceDescription)
             XCTAssertEqual(workspace.language, workspaceLanguage)
@@ -540,7 +547,8 @@ class ConversationTests: XCTestCase {
         let newWorkspaceName = "swift-sdk-test-workspace-2"
         let newWorkspaceDescription = "new description for the temporary workspace"
 
-        conversation.updateWorkspace(workspaceID: newWorkspaceID, name: newWorkspaceName, description: newWorkspaceDescription, failure: failWithError) { workspace in
+        let updateWorkspaceBody = UpdateWorkspace(name: newWorkspaceName, description: newWorkspaceDescription)
+        conversation.updateWorkspace(workspaceID: newWorkspaceID, properties: updateWorkspaceBody, failure: failWithError) { workspace in
             XCTAssertEqual(workspace.name, newWorkspaceName)
             XCTAssertEqual(workspace.description, newWorkspaceDescription)
             XCTAssertEqual(workspace.language, workspaceLanguage)
@@ -1082,8 +1090,9 @@ class ConversationTests: XCTestCase {
 
         let entityName = "swift-sdk-test-entity" + UUID().uuidString
         let entityDescription = "This is a test entity"
+        let entity = CreateEntity.init(entity: entityName, description: entityDescription)
 
-        conversation.createEntity(workspaceID: workspaceID, entity: entityName, description: "This is a test entity", failure: failWithError){ entityResponse in
+        conversation.createEntity(workspaceID: workspaceID, properties: entity, failure: failWithError){ entityResponse in
             XCTAssertEqual(entityResponse.entity, entityName)
             XCTAssertEqual(entityResponse.description, entityDescription)
             XCTAssertNotNil(entityResponse.created)
@@ -1107,8 +1116,9 @@ class ConversationTests: XCTestCase {
 
         let entityName = "swift-sdk-test-entity" + UUID().uuidString
         let entityDescription = "This is a test entity"
+        let entity = CreateEntity.init(entity: entityName, description: entityDescription)
 
-        conversation.createEntity(workspaceID: workspaceID, entity: entityName, description: entityDescription, failure: failWithError){ entityResponse in
+        conversation.createEntity(workspaceID: workspaceID, properties: entity, failure: failWithError){ entityResponse in
             XCTAssertEqual(entityResponse.entity, entityName)
             XCTAssertEqual(entityResponse.description, entityDescription)
             XCTAssertNotNil(entityResponse.created)
@@ -1122,7 +1132,8 @@ class ConversationTests: XCTestCase {
 
         let updatedEntityName = "up-" + entityName
         let updatedEntityDescription = "This is a new description for a test entity"
-        conversation.updateEntity(workspaceID: workspaceID, entity: entityName, newEntity: updatedEntityName, newDescription: updatedEntityDescription, failure: failWithError){ entityResponse in
+        let updatedEntity = UpdateEntity.init(entity: updatedEntityName, description: updatedEntityDescription)
+        conversation.updateEntity(workspaceID: workspaceID, entity: entityName, properties: updatedEntity, failure: failWithError){ entityResponse in
             XCTAssertEqual(entityResponse.entity, updatedEntityName)
             XCTAssertEqual(entityResponse.description, updatedEntityDescription)
             XCTAssertNotNil(entityResponse.created)
