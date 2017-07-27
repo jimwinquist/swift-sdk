@@ -360,45 +360,18 @@ public class Conversation {
      Create a dialog node.
 
      - parameter workspaceID: The workspace ID.
-     - parameter dialogNode: The dialog node ID.
-     - parameter description: The description of the dialog node.
-     - parameter conditions: The condition that will trigger the dialog node.
-     - parameter parent: The ID of the parent dialog node (if any).
-     - parameter previousSibling: The previous dialog node.
-     - parameter output: The output of the dialog node.
-     - parameter context: The context for the dialog node.
-     - parameter metadata: The metadata for the dialog node.
-     - parameter nextStep: 
-     - parameter actions: The actions for the dialog node.
-     - parameter title: The alias used to identify the dialog node.
-     - parameter nodeType: How the dialog node is processed.
-     - parameter eventName: How an `event_handler` node is processed.
-     - parameter variable: The location in the dialog context where output is stored.
+     - parameter properties: A CreateDialogNode object defining the content of the new dialog node.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func createDialogNode(
         workspaceID: String,
-        dialogNode: String,
-        description: String? = nil,
-        conditions: String? = nil,
-        parent: String? = nil,
-        previousSibling: String? = nil,
-        output: [String: Any]? = nil,
-        context: [String: Any]? = nil,
-        metadata: [String: Any]? = nil,
-        nextStep: DialogNodeNextStep? = nil,
-        actions: [DialogNodeAction]? = nil,
-        title: String? = nil,
-        nodeType: String? = nil,
-        eventName: String? = nil,
-        variable: String? = nil,
+        properties: CreateDialogNode,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DialogNode) -> Void)
     {
         // construct body
-        let createDialogNodeRequest = CreateDialogNode(dialogNode: dialogNode, description: description, conditions: conditions, parent: parent, previousSibling: previousSibling, output: output, context: context, metadata: metadata, nextStep: nextStep, actions: actions, title: title, nodeType: nodeType, eventName: eventName, variable: variable)
-        guard let body = try? createDialogNodeRequest.toJSON().serialize() else {
+        guard let body = try? properties.toJSON().serialize() else {
             failure?(RestError.serializationError)
             return
         }
@@ -604,46 +577,19 @@ public class Conversation {
 
      - parameter workspaceID: The workspace ID.
      - parameter dialogNode: The dialog node ID (for example, `get_order`).
-     - parameter newDialogNode: The dialog node ID.
-     - parameter newDescription: The description of the dialog node.
-     - parameter newConditions: The condition that will trigger the dialog node.
-     - parameter newParent: The ID of the parent dialog node (if any).
-     - parameter newPreviousSibling: The previous dialog node.
-     - parameter newOutput: The output of the dialog node.
-     - parameter newContext: The context for the dialog node.
-     - parameter newMetadata: The metadata for the dialog node.
-     - parameter newNextStep: 
-     - parameter newTitle: The alias used to identify the dialog node.
-     - parameter newType: How the node is processed.
-     - parameter newEventName: How an `event_handler` node is processed.
-     - parameter newVariable: The location in the dialog context where output is stored.
-     - parameter newActions: The actions for the dialog node.
+     - parameter properties: An UpdateDialogNode object defining the new contents of the dialog node.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func updateDialogNode(
         workspaceID: String,
         dialogNode: String,
-        newDialogNode: String,
-        newDescription: String? = nil,
-        newConditions: String? = nil,
-        newParent: String? = nil,
-        newPreviousSibling: String? = nil,
-        newOutput: [String: Any]? = nil,
-        newContext: [String: Any]? = nil,
-        newMetadata: [String: Any]? = nil,
-        newNextStep: DialogNodeNextStep? = nil,
-        newTitle: String? = nil,
-        newType: String? = nil,
-        newEventName: String? = nil,
-        newVariable: String? = nil,
-        newActions: [DialogNodeAction]? = nil,
+        properties: UpdateDialogNode,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (DialogNode) -> Void)
     {
         // construct body
-        let updateDialogNodeRequest = UpdateDialogNode(dialogNode: newDialogNode, description: newDescription, conditions: newConditions, parent: newParent, previousSibling: newPreviousSibling, output: newOutput, context: newContext, metadata: newMetadata, nextStep: newNextStep, title: newTitle, nodeType: newType, eventName: newEventName, variable: newVariable, actions: newActions)
-        guard let body = try? updateDialogNodeRequest.toJSON().serialize() else {
+        guard let body = try? properties.toJSON().serialize() else {
             failure?(RestError.serializationError)
             return
         }
@@ -685,27 +631,18 @@ public class Conversation {
      Create a new entity.
 
      - parameter workspaceID: The workspace ID.
-     - parameter entity: The name of the entity.
-     - parameter description: The description of the entity.
-     - parameter metadata: Any metadata related to the value.
-     - parameter values: An array of entity values.
-     - parameter fuzzyMatch: Whether to use fuzzy matching for the entity.
+     - parameter properties: A CreateEntity object defining the content of the new entity.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func createEntity(
         workspaceID: String,
-        entity: String,
-        description: String? = nil,
-        metadata: [String: Any]? = nil,
-        values: [CreateValue]? = nil,
-        fuzzyMatch: Bool? = nil,
+        properties: CreateEntity,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Entity) -> Void)
     {
         // construct body
-        let createEntityRequest = CreateEntity(entity: entity, description: description, metadata: metadata, values: values, fuzzyMatch: fuzzyMatch)
-        guard let body = try? createEntityRequest.toJSON().serialize() else {
+        guard let body = try? properties.toJSON().serialize() else {
             failure?(RestError.serializationError)
             return
         }
@@ -923,28 +860,19 @@ public class Conversation {
 
      - parameter workspaceID: The workspace ID.
      - parameter entity: The name of the entity.
-     - parameter newEntity: The name of the entity.
-     - parameter newDescription: The description of the entity.
-     - parameter newMetadata: Any metadata related to the entity.
-     - parameter newFuzzyMatch: Whether to use fuzzy matching for the entity.
-     - parameter newValues: An array of entity values.
+     - parameter properties: An UpdateEntity object defining the updated content of the entity.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func updateEntity(
         workspaceID: String,
         entity: String,
-        newEntity: String? = nil,
-        newDescription: String? = nil,
-        newMetadata: [String: Any]? = nil,
-        newFuzzyMatch: Bool? = nil,
-        newValues: [CreateValue]? = nil,
+        properties: UpdateEntity,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Entity) -> Void)
     {
         // construct body
-        let updateEntityRequest = UpdateEntity(entity: newEntity, description: newDescription, metadata: newMetadata, fuzzyMatch: newFuzzyMatch, values: newValues)
-        guard let body = try? updateEntityRequest.toJSON().serialize() else {
+        guard let body = try? properties.toJSON().serialize() else {
             failure?(RestError.serializationError)
             return
         }
@@ -1627,29 +1555,18 @@ public class Conversation {
      Get a response to a user's input.
 
      - parameter workspaceID: Unique identifier of the workspace.
-     - parameter input: An input object that includes the input text.
-     - parameter alternateIntents: Whether to return more than one intent. Set to `true` to return all matching intents.
-     - parameter context: State information for the conversation. Continue a conversation by including the context object from the previous response.
-     - parameter entities: Include the entities from the previous response when they do not need to change and to prevent Watson from trying to identify them.
-     - parameter intents: An array of name-confidence pairs for the user input. Include the intents from the previous response when they do not need to change and to prevent Watson from trying to identify them.
-     - parameter output: System output. Include the output from the request when you have several requests within the same Dialog turn to pass back in the intermediate information.
+     - parameter request: The user's input, with optional intents, entities, and other properties from the response.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func message(
         workspaceID: String,
-        input: InputData? = nil,
-        alternateIntents: Bool? = nil,
-        context: Context? = nil,
-        entities: [RuntimeEntity]? = nil,
-        intents: [RuntimeIntent]? = nil,
-        output: OutputData? = nil,
+        request: MessageRequest? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (MessageResponse) -> Void)
     {
         // construct body
-        let messageRequest = MessageRequest(input: input, alternateIntents: alternateIntents, context: context, entities: entities, intents: intents, output: output)
-        guard let body = try? messageRequest.toJSON().serialize() else {
+        guard let body = try? request?.toJSON().serialize() else {
             failure?(RestError.serializationError)
             return
         }
@@ -2286,32 +2203,17 @@ public class Conversation {
 
      Create a workspace based on component objects. You must provide workspace components defining the content of the new workspace.
 
-     - parameter name: The name of the workspace.
-     - parameter description: The description of the workspace.
-     - parameter language: The language of the workspace.
-     - parameter intents: An array of objects defining the intents for the workspace.
-     - parameter entities: An array of objects defining the entities for the workspace.
-     - parameter dialogNodes: An array of objects defining the nodes in the workspace dialog.
-     - parameter counterexamples: An array of objects defining input examples that have been marked as irrelevant input.
-     - parameter metadata: Any metadata related to the workspace.
+     - parameter properties: Valid data defining the content of the new workspace.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func createWorkspace(
-        name: String? = nil,
-        description: String? = nil,
-        language: String? = nil,
-        intents: [CreateIntent]? = nil,
-        entities: [CreateEntity]? = nil,
-        dialogNodes: [CreateDialogNode]? = nil,
-        counterexamples: [CreateCounterexample]? = nil,
-        metadata: [String: Any]? = nil,
+        properties: CreateWorkspace? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Workspace) -> Void)
     {
         // construct body
-        let createWorkspaceRequest = CreateWorkspace(name: name, description: description, language: language, intents: intents, entities: entities, dialogNodes: dialogNodes, counterexamples: counterexamples, metadata: metadata)
-        guard let body = try? createWorkspaceRequest.toJSON().serialize() else {
+        guard let body = try? properties?.toJSON().serialize() else {
             failure?(RestError.serializationError)
             return
         }
@@ -2506,33 +2408,18 @@ public class Conversation {
      Update an existing workspace with new or modified data. You must provide component objects defining the content of the updated workspace.
 
      - parameter workspaceID: The workspace ID.
-     - parameter name: The name of the workspace.
-     - parameter description: The description of the workspace.
-     - parameter language: The language of the workspace.
-     - parameter intents: An array of objects defining the intents for the workspace.
-     - parameter entities: An array of objects defining the entities for the workspace.
-     - parameter dialogNodes: An array of objects defining the nodes in the workspace dialog.
-     - parameter counterexamples: An array of objects defining input examples that have been marked as irrelevant input.
-     - parameter metadata: Any metadata related to the workspace.
+     - parameter properties: Valid data defining the new workspace content. Any elements included in the new data will completely replace the existing elements, including all subelements. Previously existing subelements are not retained unless they are included in the new data.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
     */
     public func updateWorkspace(
         workspaceID: String,
-        name: String? = nil,
-        description: String? = nil,
-        language: String? = nil,
-        intents: [CreateIntent]? = nil,
-        entities: [CreateEntity]? = nil,
-        dialogNodes: [CreateDialogNode]? = nil,
-        counterexamples: [CreateCounterexample]? = nil,
-        metadata: [String: Any]? = nil,
+        properties: UpdateWorkspace? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Workspace) -> Void)
     {
         // construct body
-        let updateWorkspaceRequest = UpdateWorkspace(name: name, description: description, language: language, intents: intents, entities: entities, dialogNodes: dialogNodes, counterexamples: counterexamples, metadata: metadata)
-        guard let body = try? updateWorkspaceRequest.toJSON().serialize() else {
+        guard let body = try? properties?.toJSON().serialize() else {
             failure?(RestError.serializationError)
             return
         }
