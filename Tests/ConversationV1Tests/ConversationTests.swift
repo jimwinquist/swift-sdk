@@ -466,7 +466,7 @@ class ConversationTests: XCTestCase {
             
             XCTAssertNotNil(workspace.intents)
             for intent in workspace.intents! {
-                XCTAssertEqual(intent.intent, workspaceIntent.intent)
+                XCTAssertEqual(intent.intentName, workspaceIntent.intent)
                 XCTAssertEqual(intent.description, workspaceIntent.description)
                 XCTAssertNotNil(intent.created)
                 XCTAssertNotNil(intent.updated)
@@ -581,7 +581,7 @@ class ConversationTests: XCTestCase {
 
         conversation.listIntents(workspaceID: workspaceID, failure: failWithError) { intents in
             for intent in intents.intents {
-                XCTAssertNotNil(intent.intent)
+                XCTAssertNotNil(intent.intentName)
                 XCTAssertNotNil(intent.created)
                 XCTAssertNotNil(intent.updated)
                 XCTAssertNil(intent.examples)
@@ -601,7 +601,7 @@ class ConversationTests: XCTestCase {
         
         conversation.listIntents(workspaceID: workspaceID, includeCount: true, failure: failWithError) { intents in
             for intent in intents.intents {
-                XCTAssertNotNil(intent.intent)
+                XCTAssertNotNil(intent.intentName)
                 XCTAssertNotNil(intent.created)
                 XCTAssertNotNil(intent.updated)
                 XCTAssertNil(intent.examples)
@@ -623,7 +623,7 @@ class ConversationTests: XCTestCase {
         conversation.listIntents(workspaceID: workspaceID, pageLimit: 1, failure: failWithError) { intents in
             XCTAssertEqual(intents.intents.count, 1)
             for intent in intents.intents {
-                XCTAssertNotNil(intent.intent)
+                XCTAssertNotNil(intent.intentName)
                 XCTAssertNotNil(intent.created)
                 XCTAssertNotNil(intent.updated)
                 XCTAssertNil(intent.examples)
@@ -643,7 +643,7 @@ class ConversationTests: XCTestCase {
         
         conversation.listIntents(workspaceID: workspaceID, export: true, failure: failWithError) { intents in
             for intent in intents.intents {
-                XCTAssertNotNil(intent.intent)
+                XCTAssertNotNil(intent.intentName)
                 XCTAssertNotNil(intent.created)
                 XCTAssertNotNil(intent.updated)
                 XCTAssertNotNil(intent.examples)
@@ -671,7 +671,7 @@ class ConversationTests: XCTestCase {
         let example1 = CreateExample(text: "example 1 for \(newIntentName)")
         let example2 = CreateExample(text: "example 2 for \(newIntentName)")
         conversation.createIntent(workspaceID: workspaceID, intent: newIntentName, description: newIntentDescription, examples: [example1, example2], failure: failWithError) { intent in
-            XCTAssertEqual(intent.intent, newIntentName)
+            XCTAssertEqual(intent.intentName, newIntentName)
             XCTAssertEqual(intent.description, newIntentDescription)
             XCTAssertNotNil(intent.created)
             XCTAssertNotNil(intent.updated)
@@ -693,7 +693,7 @@ class ConversationTests: XCTestCase {
         let expectation = self.expectation(description: description)
         
         conversation.getIntent(workspaceID: workspaceID, intent: "weather", export: true, failure: failWithError) { intent in
-            XCTAssertNotNil(intent.intent)
+            XCTAssertNotNil(intent.intentName)
             XCTAssertNotNil(intent.created)
             XCTAssertNotNil(intent.updated)
             XCTAssertNotNil(intent.examples)
@@ -716,7 +716,7 @@ class ConversationTests: XCTestCase {
         let example1 = CreateExample(text: "example 1 for \(newIntentName)")
         let example2 = CreateExample(text: "example 2 for \(newIntentName)")
         conversation.createIntent(workspaceID: workspaceID, intent: newIntentName, description: newIntentDescription, examples: [example1, example2], failure: failWithError) { intent in
-            XCTAssertEqual(intent.intent, newIntentName)
+            XCTAssertEqual(intent.intentName, newIntentName)
             XCTAssertEqual(intent.description, newIntentDescription)
             XCTAssertNotNil(intent.created)
             XCTAssertNotNil(intent.updated)
@@ -731,7 +731,7 @@ class ConversationTests: XCTestCase {
         let updatedIntentDescription = "updated-description-for-\(newIntentName)"
         let updatedExample1 = CreateExample(text: "updated example for \(newIntentName)")
         conversation.updateIntent(workspaceID: workspaceID, intent: newIntentName, newIntent: updatedIntentName, newDescription: updatedIntentDescription, newExamples: [updatedExample1], failure: failWithError) { intent in
-            XCTAssertEqual(intent.intent, updatedIntentName)
+            XCTAssertEqual(intent.intentName, updatedIntentName)
             XCTAssertEqual(intent.description, updatedIntentDescription)
             XCTAssertNotNil(intent.created)
             XCTAssertNotNil(intent.updated)
@@ -1015,7 +1015,7 @@ class ConversationTests: XCTestCase {
 
         conversation.listEntities(workspaceID: workspaceID, failure: failWithError){entities in
             for entity in entities.entities {
-                XCTAssertNotNil(entity.entity)
+                XCTAssertNotNil(entity.entityName)
                 XCTAssertNotNil(entity.created)
                 XCTAssertNotNil(entity.updated)
             }
@@ -1035,7 +1035,7 @@ class ConversationTests: XCTestCase {
 
         conversation.listEntities(workspaceID: workspaceID, includeCount: true, failure: failWithError) { entities in
             for entity in entities.entities {
-                XCTAssertNotNil(entity.entity)
+                XCTAssertNotNil(entity.entityName)
                 XCTAssertNotNil(entity.created)
                 XCTAssertNotNil(entity.updated)
             }
@@ -1055,7 +1055,7 @@ class ConversationTests: XCTestCase {
 
         conversation.listEntities(workspaceID: workspaceID, pageLimit: 1, failure: failWithError){entities in
             for entity in entities.entities {
-                XCTAssertNotNil(entity.entity)
+                XCTAssertNotNil(entity.entityName)
                 XCTAssertNotNil(entity.created)
                 XCTAssertNotNil(entity.updated)
             }
@@ -1076,7 +1076,7 @@ class ConversationTests: XCTestCase {
 
         conversation.listEntities(workspaceID: workspaceID, export: true, failure: failWithError) { entities in
             for entity in entities.entities {
-                XCTAssertNotNil(entity.entity)
+                XCTAssertNotNil(entity.entityName)
                 XCTAssertNotNil(entity.created)
                 XCTAssertNotNil(entity.updated)
             }
@@ -1098,7 +1098,7 @@ class ConversationTests: XCTestCase {
         let entity = CreateEntity.init(entity: entityName, description: entityDescription)
 
         conversation.createEntity(workspaceID: workspaceID, properties: entity, failure: failWithError){ entityResponse in
-            XCTAssertEqual(entityResponse.entity, entityName)
+            XCTAssertEqual(entityResponse.entityName, entityName)
             XCTAssertEqual(entityResponse.description, entityDescription)
             XCTAssertNotNil(entityResponse.created)
             XCTAssertNotNil(entityResponse.updated)
@@ -1124,7 +1124,7 @@ class ConversationTests: XCTestCase {
         let entity = CreateEntity.init(entity: entityName, description: entityDescription)
 
         conversation.createEntity(workspaceID: workspaceID, properties: entity, failure: failWithError){ entityResponse in
-            XCTAssertEqual(entityResponse.entity, entityName)
+            XCTAssertEqual(entityResponse.entityName, entityName)
             XCTAssertEqual(entityResponse.description, entityDescription)
             XCTAssertNotNil(entityResponse.created)
             XCTAssertNotNil(entityResponse.updated)
@@ -1139,7 +1139,7 @@ class ConversationTests: XCTestCase {
         let updatedEntityDescription = "This is a new description for a test entity"
         let updatedEntity = UpdateEntity.init(entity: updatedEntityName, description: updatedEntityDescription)
         conversation.updateEntity(workspaceID: workspaceID, entity: entityName, properties: updatedEntity, failure: failWithError){ entityResponse in
-            XCTAssertEqual(entityResponse.entity, updatedEntityName)
+            XCTAssertEqual(entityResponse.entityName, updatedEntityName)
             XCTAssertEqual(entityResponse.description, updatedEntityDescription)
             XCTAssertNotNil(entityResponse.created)
             XCTAssertNotNil(entityResponse.updated)
@@ -1163,8 +1163,8 @@ class ConversationTests: XCTestCase {
         conversation.listEntities(workspaceID: workspaceID, failure: failWithError) {entityCollection in
             XCTAssert(entityCollection.entities.count > 0)
             let entity = entityCollection.entities[0]
-            self.conversation.getEntity(workspaceID: self.workspaceID, entity: entity.entity, export: true, failure: self.failWithError) { entityExport in
-                XCTAssertEqual(entityExport.entity, entity.entity)
+            self.conversation.getEntity(workspaceID: self.workspaceID, entity: entity.entityName, export: true, failure: self.failWithError) { entityExport in
+                XCTAssertEqual(entityExport.entityName, entity.entityName)
                 XCTAssertEqual(entityExport.description, entity.description)
                 XCTAssertNotNil(entityExport.created)
                 XCTAssertNotNil(entityExport.updated)
@@ -1184,7 +1184,7 @@ class ConversationTests: XCTestCase {
 
         conversation.listValues(workspaceID: workspaceID, entity: entityName, failure: failWithError) { valueCollection in
             for value in valueCollection.values {
-                XCTAssertNotNil(value.value)
+                XCTAssertNotNil(value.entityValue)
                 XCTAssertNotNil(value.created)
                 XCTAssertNotNil(value.updated)
             }
@@ -1204,7 +1204,7 @@ class ConversationTests: XCTestCase {
         let valueName = "swift-sdk-test-value" + UUID().uuidString
 
         conversation.createValue(workspaceID: workspaceID, entity: entityName, value: valueName, failure: failWithError) { value in
-            XCTAssertEqual(value.value, valueName)
+            XCTAssertEqual(value.entityValue, valueName)
             XCTAssertNotNil(value.created)
             XCTAssertNotNil(value.updated)
             expectation.fulfill()
@@ -1217,7 +1217,7 @@ class ConversationTests: XCTestCase {
         let updatedValueName = "up-" + valueName
 
         conversation.updateValue(workspaceID: workspaceID, entity: entityName, value: valueName, newValue: updatedValueName, newMetadata: ["oldname": valueName], failure: failWithError) { value in
-            XCTAssertEqual(value.value, updatedValueName)
+            XCTAssertEqual(value.entityValue, updatedValueName)
             XCTAssertNotNil(value.created)
             XCTAssertNotNil(value.updated)
             XCTAssertNotNil(value.metadata)
@@ -1243,8 +1243,8 @@ class ConversationTests: XCTestCase {
         conversation.listValues(workspaceID: workspaceID, entity: entityName, failure: failWithError) { valueCollection in
             XCTAssert(valueCollection.values.count > 0)
             let value = valueCollection.values[0]
-            self.conversation.getValue(workspaceID: self.workspaceID, entity: entityName, value: value.value, export: true, failure: self.failWithError) { valueExport in
-                XCTAssertEqual(valueExport.value, value.value)
+            self.conversation.getValue(workspaceID: self.workspaceID, entity: entityName, value: value.entityValue, export: true, failure: self.failWithError) { valueExport in
+                XCTAssertEqual(valueExport.entityValue, value.entityValue)
                 XCTAssertNotNil(valueExport.created)
                 XCTAssertNotNil(valueExport.updated)
                 expectation.fulfill()
@@ -1263,7 +1263,7 @@ class ConversationTests: XCTestCase {
             for synonym in synonyms.synonyms {
                 XCTAssertNotNil(synonym.created)
                 XCTAssertNotNil(synonym.updated)
-                XCTAssertNotNil(synonym.synonym)
+                XCTAssertNotNil(synonym.synonymText)
             }
             XCTAssertNotNil(synonyms.pagination.refreshUrl)
             XCTAssertNil(synonyms.pagination.total)
@@ -1281,7 +1281,7 @@ class ConversationTests: XCTestCase {
             for synonym in synonyms.synonyms {
                 XCTAssertNotNil(synonym.created)
                 XCTAssertNotNil(synonym.updated)
-                XCTAssertNotNil(synonym.synonym)
+                XCTAssertNotNil(synonym.synonymText)
             }
             XCTAssertNotNil(synonyms.pagination.refreshUrl)
             XCTAssertNotNil(synonyms.pagination.total)
@@ -1301,7 +1301,7 @@ class ConversationTests: XCTestCase {
             for synonym in synonyms.synonyms {
                 XCTAssertNotNil(synonym.created)
                 XCTAssertNotNil(synonym.updated)
-                XCTAssertNotNil(synonym.synonym)
+                XCTAssertNotNil(synonym.synonymText)
             }
             XCTAssertNotNil(synonyms.pagination.refreshUrl)
             XCTAssertNotNil(synonyms.pagination.nextUrl)
@@ -1320,7 +1320,7 @@ class ConversationTests: XCTestCase {
         conversation.createSynonym(workspaceID: workspaceID,entity: "appliance", value: "lights", synonym: newSynonym, failure: failWithError) { synonym in
             XCTAssertNotNil(synonym.created)
             XCTAssertNotNil(synonym.updated)
-            XCTAssertEqual(synonym.synonym, newSynonym)
+            XCTAssertEqual(synonym.synonymText, newSynonym)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -1340,7 +1340,7 @@ class ConversationTests: XCTestCase {
 
         let synonymName = "headlight"
         conversation.getSynonym(workspaceID: workspaceID,entity: "appliance", value: "lights", synonym: synonymName, failure: failWithError) { synonym in
-            XCTAssertEqual(synonym.synonym, synonymName)
+            XCTAssertEqual(synonym.synonymText, synonymName)
             XCTAssertNotNil(synonym.created)
             XCTAssertNotNil(synonym.updated)
             expectation.fulfill()
@@ -1356,7 +1356,7 @@ class ConversationTests: XCTestCase {
         conversation.createSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym, failure: failWithError) { synonym in
             XCTAssertNotNil(synonym.created)
             XCTAssertNotNil(synonym.updated)
-            XCTAssertEqual(synonym.synonym, newSynonym)
+            XCTAssertEqual(synonym.synonymText, newSynonym)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -1368,7 +1368,7 @@ class ConversationTests: XCTestCase {
         conversation.updateSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym, newSynonym: updatedSynonym, failure: failWithError){ synonym in
             XCTAssertNotNil(synonym.created)
             XCTAssertNotNil(synonym.updated)
-            XCTAssertEqual(synonym.synonym, updatedSynonym)
+            XCTAssertEqual(synonym.synonymText, updatedSynonym)
             expectation2.fulfill()
         }
         waitForExpectations()
