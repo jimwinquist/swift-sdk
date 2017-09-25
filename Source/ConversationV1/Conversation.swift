@@ -448,7 +448,7 @@ public class Conversation {
         request.responseVoid(responseToError: responseToError) {
             (response: RestResponse) in
                 switch response.result {
-                case .success(let retval): success(retval)
+                case .success(): success()
                 case .failure(let error): failure?(error)
                 }
         }
@@ -719,7 +719,7 @@ public class Conversation {
         request.responseVoid(responseToError: responseToError) {
             (response: RestResponse) in
                 switch response.result {
-                case .success(let retval): success(retval)
+                case .success(): success()
                 case .failure(let error): failure?(error)
                 }
         }
@@ -1007,7 +1007,7 @@ public class Conversation {
         request.responseVoid(responseToError: responseToError) {
             (response: RestResponse) in
                 switch response.result {
-                case .success(let retval): success(retval)
+                case .success(): success()
                 case .failure(let error): failure?(error)
                 }
         }
@@ -1290,7 +1290,7 @@ public class Conversation {
         request.responseVoid(responseToError: responseToError) {
             (response: RestResponse) in
                 switch response.result {
-                case .success(let retval): success(retval)
+                case .success(): success()
                 case .failure(let error): failure?(error)
                 }
         }
@@ -1705,7 +1705,7 @@ public class Conversation {
         request.responseVoid(responseToError: responseToError) {
             (response: RestResponse) in
                 switch response.result {
-                case .success(let retval): success(retval)
+                case .success(): success()
                 case .failure(let error): failure?(error)
                 }
         }
@@ -1998,7 +1998,7 @@ public class Conversation {
         request.responseVoid(responseToError: responseToError) {
             (response: RestResponse) in
                 switch response.result {
-                case .success(let retval): success(retval)
+                case .success(): success()
                 case .failure(let error): failure?(error)
                 }
         }
@@ -2283,7 +2283,7 @@ public class Conversation {
         request.responseVoid(responseToError: responseToError) {
             (response: RestResponse) in
                 switch response.result {
-                case .success(let retval): success(retval)
+                case .success(): success()
                 case .failure(let error): failure?(error)
                 }
         }

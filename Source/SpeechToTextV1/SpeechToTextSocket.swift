@@ -22,11 +22,11 @@ internal class SpeechToTextSocket: WebSocketDelegate {
     private(set) internal var results = SpeechRecognitionResults()
     private(set) internal var state: SpeechToTextState = .Disconnected
     
-    internal var onConnect: ((Void) -> Void)? = nil
-    internal var onListening: ((Void) -> Void)? = nil
+    internal var onConnect: (() -> Void)? = nil
+    internal var onListening: (() -> Void)? = nil
     internal var onResults: ((SpeechRecognitionResults) -> Void)? = nil
     internal var onError: ((Error) -> Void)? = nil
-    internal var onDisconnect: ((Void) -> Void)? = nil
+    internal var onDisconnect: (() -> Void)? = nil
     
     private let socket: WebSocket
     private let queue = OperationQueue()
@@ -138,14 +138,6 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         guard let stop = try? RecognitionStop().toJSON().serializeString() else { return }
         queue.addOperation {
             self.socket.write(string: stop)
-        }
-    }
-    
-    internal func writeNop() {
-        guard state != .Disconnected else { return }
-        let nop = "{\"action\": \"no-op\"}"
-        queue.addOperation {
-            self.socket.write(string: nop)
         }
     }
     

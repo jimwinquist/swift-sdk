@@ -20,7 +20,7 @@ public struct RestRequest {
 
     public static let userAgent: String = {
         let sdk = "watson-apis-swift-sdk"
-        let sdkVersion = "0.15.1"
+        let sdkVersion = "0.17.0"
         
         let operatingSystem: String = {
             #if os(iOS)
@@ -283,7 +283,7 @@ public struct RestRequest {
             }
 
             // execute callback
-            let result = Result<Void>.success()
+            let result = Result<Void>.success(())
             let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
             completionHandler(dataResponse)
         }

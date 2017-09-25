@@ -64,14 +64,14 @@ class DiscoveryTests: XCTestCase {
             trainedEnvironmentID = environment.first?.environmentID
             expectation1.fulfill()
         }
-        XCTWaiter.wait(for: [expectation1], timeout: 20)
+        let _ = XCTWaiter.wait(for: [expectation1], timeout: 20)
         
         let description2 = "Delete the trained environment."
         let expectation2 = XCTestExpectation(description: description2)
         discovery.deleteEnvironment(withID: trainedEnvironmentID!, failure: failure) { environment in
             expectation2.fulfill()
         }
-        XCTWaiter.wait(for: [expectation2], timeout: 20)
+        let _ = XCTWaiter.wait(for: [expectation2], timeout: 20)
     }
     
     /** Instantiate Discovery instance. */
@@ -293,6 +293,11 @@ class DiscoveryTests: XCTestCase {
     
     /** Fail false positives. */
     func failWithResult<T>(result: T) {
+        XCTFail("Negative test returned a result.")
+    }
+    
+    /** Fail false positives. */
+    func failWithResult() {
         XCTFail("Negative test returned a result.")
     }
     
@@ -596,7 +601,7 @@ class DiscoveryTests: XCTestCase {
             
             XCTAssertEqual(configuration.configurationID, newConfigID)
             XCTAssertEqual(configuration.status, "deleted")
-            XCTAssertEqual(configuration.noticeMessages?.count, 0)
+            XCTAssertNil(configuration.noticeMessages)
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -741,7 +746,7 @@ class DiscoveryTests: XCTestCase {
                 
                 XCTAssertEqual(configuration.configurationID, newConfigID)
                 XCTAssertEqual(configuration.status, "deleted")
-                XCTAssertEqual(configuration.noticeMessages?.count, 0)
+                XCTAssertNil(configuration.noticeMessages)
                 expectation4.fulfill()
         }
         waitForExpectations()
@@ -766,7 +771,7 @@ class DiscoveryTests: XCTestCase {
             failure: failWithError) {
                 testConfigurationDetails in
                 XCTAssertEqual(testConfigurationDetails.status, "completed")
-                XCTAssertEqual(testConfigurationDetails.enrichedFieldUnits, 0)
+                XCTAssertEqual(testConfigurationDetails.enrichedFieldUnits, nil)
                 XCTAssertEqual(testConfigurationDetails.originalMediaType, "application/json")
                 if let snapshots = testConfigurationDetails.snapshots {
                     for snapshot in snapshots {
