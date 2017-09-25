@@ -21,7 +21,7 @@ import RestKit
 public struct Intent: JSONDecodable, JSONEncodable {
 
     /// The name of the intent.
-    public let intent: String
+    public let intentName: String
 
     /// The timestamp for creation of the intent.
     public let created: String
@@ -35,15 +35,15 @@ public struct Intent: JSONDecodable, JSONEncodable {
     /**
      Initialize a `Intent` with member variables.
 
-     - parameter intent: The name of the intent.
+     - parameter intentName: The name of the intent.
      - parameter created: The timestamp for creation of the intent.
      - parameter updated: The timestamp for the last update to the intent.
      - parameter description: The description of the intent.
 
      - returns: An initialized `Intent`.
     */
-    public init(intent: String, created: String, updated: String, description: String? = nil) {
-        self.intent = intent
+    public init(intentName: String, created: String, updated: String, description: String? = nil) {
+        self.intentName = intentName
         self.created = created
         self.updated = updated
         self.description = description
@@ -52,7 +52,7 @@ public struct Intent: JSONDecodable, JSONEncodable {
     // MARK: JSONDecodable
     /// Used internally to initialize a `Intent` model from JSON.
     public init(json: JSON) throws {
-        intent = try json.getString(at: "intent")
+        intentName = try json.getString(at: "intent")
         created = try json.getString(at: "created")
         updated = try json.getString(at: "updated")
         description = try? json.getString(at: "description")
@@ -62,7 +62,7 @@ public struct Intent: JSONDecodable, JSONEncodable {
     /// Used internally to serialize a `Intent` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
-        json["intent"] = intent
+        json["intent"] = intentName
         json["created"] = created
         json["updated"] = updated
         if let description = description { json["description"] = description }

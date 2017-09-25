@@ -17,7 +17,7 @@
 import Foundation
 import RestKit
 
-/** DialogNodeNextStep. */
+/** The next step to execute following this dialog node. */
 public struct DialogNodeNextStep: JSONDecodable, JSONEncodable {
 
     /// How the `next_step` reference is processed.

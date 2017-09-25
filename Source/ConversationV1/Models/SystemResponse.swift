@@ -20,30 +20,18 @@ import RestKit
 /** For internal use only. */
 public struct SystemResponse: JSONDecodable, JSONEncodable {
 
-    public let systemResponseObject: [String: Any]?
-
-    /**
-     Initialize a `SystemResponse` with member variables.
-
-     - parameter systemResponseObject: 
-
-     - returns: An initialized `SystemResponse`.
-    */
-    public init(systemResponseObject: [String: Any]? = nil) {
-        self.systemResponseObject = systemResponseObject
-    }
+    /// The raw JSON object used to construct this model.
+    public let json: [String: Any]
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `SystemResponse` model from JSON.
     public init(json: JSON) throws {
-        systemResponseObject = try? json.getDictionaryObject(at: "SystemResponseObject")
+        self.json = try json.getDictionaryObject()
     }
 
     // MARK: JSONEncodable
     /// Used internally to serialize a `SystemResponse` model to JSON.
     public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let systemResponseObject = systemResponseObject { json["SystemResponseObject"] = systemResponseObject }
         return json
     }
 }

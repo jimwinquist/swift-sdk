@@ -21,7 +21,7 @@ import RestKit
 public struct Value: JSONDecodable, JSONEncodable {
 
     /// The text of the entity value.
-    public let value: String
+    public let entityValue: String
 
     /// Any metadata related to the entity value.
     public let metadata: [String: Any]?
@@ -35,15 +35,15 @@ public struct Value: JSONDecodable, JSONEncodable {
     /**
      Initialize a `Value` with member variables.
 
-     - parameter value: The text of the entity value.
+     - parameter entityValue: The text of the entity value.
      - parameter created: The timestamp for creation of the entity value.
      - parameter updated: The timestamp for the last update to the entity value.
      - parameter metadata: Any metadata related to the entity value.
 
      - returns: An initialized `Value`.
     */
-    public init(value: String, created: String, updated: String, metadata: [String: Any]? = nil) {
-        self.value = value
+    public init(entityValue: String, created: String, updated: String, metadata: [String: Any]? = nil) {
+        self.entityValue = entityValue
         self.created = created
         self.updated = updated
         self.metadata = metadata
@@ -52,7 +52,7 @@ public struct Value: JSONDecodable, JSONEncodable {
     // MARK: JSONDecodable
     /// Used internally to initialize a `Value` model from JSON.
     public init(json: JSON) throws {
-        value = try json.getString(at: "value")
+        entityValue = try json.getString(at: "value")
         metadata = try? json.getDictionaryObject(at: "metadata")
         created = try json.getString(at: "created")
         updated = try json.getString(at: "updated")
@@ -62,7 +62,7 @@ public struct Value: JSONDecodable, JSONEncodable {
     /// Used internally to serialize a `Value` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
-        json["value"] = value
+        json["value"] = entityValue
         json["created"] = created
         json["updated"] = updated
         if let metadata = metadata { json["metadata"] = metadata }

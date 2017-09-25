@@ -53,6 +53,9 @@ public struct WorkspaceExport: JSONDecodable, JSONEncodable {
     /// The current status of the workspace.
     public let status: String
 
+    /// Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.
+    public let learningOptOut: Bool
+
     /// An array of intents.
     public let intents: [IntentExport]?
 
@@ -76,6 +79,7 @@ public struct WorkspaceExport: JSONDecodable, JSONEncodable {
      - parameter updated: The timestamp for the last update to the workspace.
      - parameter workspaceID: The workspace ID.
      - parameter status: The current status of the workspace.
+     - parameter learningOptOut: Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.
      - parameter intents: An array of intents.
      - parameter entities: An array of entities.
      - parameter counterexamples: An array of counterexamples.
@@ -83,7 +87,7 @@ public struct WorkspaceExport: JSONDecodable, JSONEncodable {
 
      - returns: An initialized `WorkspaceExport`.
     */
-    public init(name: String, description: String, language: String, metadata: [String: Any], created: String, updated: String, workspaceID: String, status: String, intents: [IntentExport]? = nil, entities: [EntityExport]? = nil, counterexamples: [Counterexample]? = nil, dialogNodes: [DialogNode]? = nil) {
+    public init(name: String, description: String, language: String, metadata: [String: Any], created: String, updated: String, workspaceID: String, status: String, learningOptOut: Bool, intents: [IntentExport]? = nil, entities: [EntityExport]? = nil, counterexamples: [Counterexample]? = nil, dialogNodes: [DialogNode]? = nil) {
         self.name = name
         self.description = description
         self.language = language
@@ -92,6 +96,7 @@ public struct WorkspaceExport: JSONDecodable, JSONEncodable {
         self.updated = updated
         self.workspaceID = workspaceID
         self.status = status
+        self.learningOptOut = learningOptOut
         self.intents = intents
         self.entities = entities
         self.counterexamples = counterexamples
@@ -109,6 +114,7 @@ public struct WorkspaceExport: JSONDecodable, JSONEncodable {
         updated = try json.getString(at: "updated")
         workspaceID = try json.getString(at: "workspace_id")
         status = try json.getString(at: "status")
+        learningOptOut = try json.getBool(at: "learning_opt_out")
         intents = try? json.decodedArray(at: "intents", type: IntentExport.self)
         entities = try? json.decodedArray(at: "entities", type: EntityExport.self)
         counterexamples = try? json.decodedArray(at: "counterexamples", type: Counterexample.self)
@@ -127,6 +133,7 @@ public struct WorkspaceExport: JSONDecodable, JSONEncodable {
         json["updated"] = updated
         json["workspace_id"] = workspaceID
         json["status"] = status
+        json["learning_opt_out"] = learningOptOut
         if let intents = intents {
             json["intents"] = intents.map { $0.toJSONObject() }
         }

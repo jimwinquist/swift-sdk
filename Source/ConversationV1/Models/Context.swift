@@ -26,14 +26,15 @@ public struct Context: JSONDecodable, JSONEncodable {
     /// The unique identifier of the conversation.
     public let conversationID: String
 
-    public let system: SystemResponse?
+    /// For internal use only.
+    public let system: SystemResponse
 
     // MARK: JSONDecodable
     /// Used internally to initialize a `Context` model from JSON.
     public init(json: JSON) throws {
         self.json = try json.getDictionaryObject()
         conversationID = try json.getString(at: "conversation_id")
-        system = try? json.decode(at: "system", type: SystemResponse.self)
+        system = try json.decode(at: "system", type: SystemResponse.self)
     }
 
     // MARK: JSONEncodable

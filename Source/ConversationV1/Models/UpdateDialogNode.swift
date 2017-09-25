@@ -65,6 +65,7 @@ public struct UpdateDialogNode: JSONDecodable, JSONEncodable {
     /// The metadata for the dialog node.
     public let metadata: [String: Any]?
 
+    /// The next step to execute following this dialog node.
     public let nextStep: DialogNodeNextStep?
 
     /// The alias used to identify the dialog node.
@@ -93,7 +94,7 @@ public struct UpdateDialogNode: JSONDecodable, JSONEncodable {
      - parameter output: The output of the dialog node.
      - parameter context: The context for the dialog node.
      - parameter metadata: The metadata for the dialog node.
-     - parameter nextStep: 
+     - parameter nextStep: The next step to execute following this dialog node.
      - parameter title: The alias used to identify the dialog node.
      - parameter nodeType: How the node is processed.
      - parameter eventName: How an `event_handler` node is processed.

@@ -42,7 +42,7 @@ public struct DialogNode: JSONDecodable, JSONEncodable {
     }
 
     /// The dialog node ID.
-    public let dialogNode: String
+    public let dialogNodeID: String
 
     /// The description of the dialog node.
     public let description: String
@@ -65,6 +65,7 @@ public struct DialogNode: JSONDecodable, JSONEncodable {
     /// The metadata (if any) for the dialog node.
     public let metadata: [String: Any]
 
+    /// The next step to execute following this dialog node.
     public let nextStep: DialogNodeNextStep
 
     /// The timestamp for creation of the dialog node.
@@ -91,7 +92,7 @@ public struct DialogNode: JSONDecodable, JSONEncodable {
     /**
      Initialize a `DialogNode` with member variables.
 
-     - parameter dialogNode: The dialog node ID.
+     - parameter dialogNodeID: The dialog node ID.
      - parameter description: The description of the dialog node.
      - parameter conditions: The condition that triggers the dialog node.
      - parameter parent: The ID of the parent dialog node.
@@ -99,7 +100,7 @@ public struct DialogNode: JSONDecodable, JSONEncodable {
      - parameter output: The output of the dialog node.
      - parameter context: The context (if defined) for the dialog node.
      - parameter metadata: The metadata (if any) for the dialog node.
-     - parameter nextStep: 
+     - parameter nextStep: The next step to execute following this dialog node.
      - parameter created: The timestamp for creation of the dialog node.
      - parameter title: The alias used to identify the dialog node.
      - parameter updated: The timestamp for the most recent update to the dialog node.
@@ -110,8 +111,8 @@ public struct DialogNode: JSONDecodable, JSONEncodable {
 
      - returns: An initialized `DialogNode`.
     */
-    public init(dialogNode: String, description: String, conditions: String, parent: String, previousSibling: String, output: [String: Any], context: [String: Any], metadata: [String: Any], nextStep: DialogNodeNextStep, created: String, title: String, updated: String? = nil, actions: [DialogNodeAction]? = nil, nodeType: String? = nil, eventName: String? = nil, variable: String? = nil) {
-        self.dialogNode = dialogNode
+    public init(dialogNodeID: String, description: String, conditions: String, parent: String, previousSibling: String, output: [String: Any], context: [String: Any], metadata: [String: Any], nextStep: DialogNodeNextStep, created: String, title: String, updated: String? = nil, actions: [DialogNodeAction]? = nil, nodeType: String? = nil, eventName: String? = nil, variable: String? = nil) {
+        self.dialogNodeID = dialogNodeID
         self.description = description
         self.conditions = conditions
         self.parent = parent
@@ -132,7 +133,7 @@ public struct DialogNode: JSONDecodable, JSONEncodable {
     // MARK: JSONDecodable
     /// Used internally to initialize a `DialogNode` model from JSON.
     public init(json: JSON) throws {
-        dialogNode = try json.getString(at: "dialog_node")
+        dialogNodeID = try json.getString(at: "dialog_node")
         description = try json.getString(at: "description")
         conditions = try json.getString(at: "conditions")
         parent = try json.getString(at: "parent")
@@ -154,7 +155,7 @@ public struct DialogNode: JSONDecodable, JSONEncodable {
     /// Used internally to serialize a `DialogNode` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
-        json["dialog_node"] = dialogNode
+        json["dialog_node"] = dialogNodeID
         json["description"] = description
         json["conditions"] = conditions
         json["parent"] = parent

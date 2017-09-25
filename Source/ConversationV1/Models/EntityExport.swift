@@ -21,7 +21,7 @@ import RestKit
 public struct EntityExport: JSONDecodable, JSONEncodable {
 
     /// The name of the entity.
-    public let entity: String
+    public let entityName: String
 
     /// The timestamp for creation of the entity.
     public let created: String
@@ -44,7 +44,7 @@ public struct EntityExport: JSONDecodable, JSONEncodable {
     /**
      Initialize a `EntityExport` with member variables.
 
-     - parameter entity: The name of the entity.
+     - parameter entityName: The name of the entity.
      - parameter created: The timestamp for creation of the entity.
      - parameter updated: The timestamp for the last update to the entity.
      - parameter description: The description of the entity.
@@ -54,8 +54,8 @@ public struct EntityExport: JSONDecodable, JSONEncodable {
 
      - returns: An initialized `EntityExport`.
     */
-    public init(entity: String, created: String, updated: String, description: String? = nil, metadata: [String: Any]? = nil, fuzzyMatch: Bool? = nil, values: [ValueExport]? = nil) {
-        self.entity = entity
+    public init(entityName: String, created: String, updated: String, description: String? = nil, metadata: [String: Any]? = nil, fuzzyMatch: Bool? = nil, values: [ValueExport]? = nil) {
+        self.entityName = entityName
         self.created = created
         self.updated = updated
         self.description = description
@@ -67,7 +67,7 @@ public struct EntityExport: JSONDecodable, JSONEncodable {
     // MARK: JSONDecodable
     /// Used internally to initialize a `EntityExport` model from JSON.
     public init(json: JSON) throws {
-        entity = try json.getString(at: "entity")
+        entityName = try json.getString(at: "entity")
         created = try json.getString(at: "created")
         updated = try json.getString(at: "updated")
         description = try? json.getString(at: "description")
@@ -80,7 +80,7 @@ public struct EntityExport: JSONDecodable, JSONEncodable {
     /// Used internally to serialize a `EntityExport` model to JSON.
     public func toJSONObject() -> Any {
         var json = [String: Any]()
-        json["entity"] = entity
+        json["entity"] = entityName
         json["created"] = created
         json["updated"] = updated
         if let description = description { json["description"] = description }
