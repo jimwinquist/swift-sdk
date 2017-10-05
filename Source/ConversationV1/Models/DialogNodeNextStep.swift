@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** The next step to execute following this dialog node. */
-public struct DialogNodeNextStep: JSONDecodable, JSONEncodable {
+public struct DialogNodeNextStep {
 
     /// How the `next_step` reference is processed.
     public enum Behavior: String {
@@ -56,22 +56,29 @@ public struct DialogNodeNextStep: JSONDecodable, JSONEncodable {
         self.dialogNode = dialogNode
         self.selector = selector
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `DialogNodeNextStep` model from JSON.
-    public init(json: JSON) throws {
-        behavior = try json.getString(at: "behavior")
-        dialogNode = try? json.getString(at: "dialog_node")
-        selector = try? json.getString(at: "selector")
+extension DialogNodeNextStep: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case behavior = "behavior"
+        case dialogNode = "dialog_node"
+        case selector = "selector"
+        static let allValues = [behavior, dialogNode, selector]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `DialogNodeNextStep` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["behavior"] = behavior
-        if let dialogNode = dialogNode { json["dialog_node"] = dialogNode }
-        if let selector = selector { json["selector"] = selector }
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        behavior = try container.decode(String.self, forKey: .behavior)
+        dialogNode = try container.decodeIfPresent(String.self, forKey: .dialogNode)
+        selector = try container.decodeIfPresent(String.self, forKey: .selector)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(behavior, forKey: .behavior)
+        try container.encodeIfPresent(dialogNode, forKey: .dialogNode)
+        try container.encodeIfPresent(selector, forKey: .selector)
+    }
+
 }

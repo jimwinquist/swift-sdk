@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** CounterexampleCollection. */
-public struct CounterexampleCollection: JSONDecodable, JSONEncodable {
+public struct CounterexampleCollection {
 
     /// An array of objects describing the examples marked as irrelevant input.
     public let counterexamples: [Counterexample]
@@ -38,20 +38,26 @@ public struct CounterexampleCollection: JSONDecodable, JSONEncodable {
         self.counterexamples = counterexamples
         self.pagination = pagination
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `CounterexampleCollection` model from JSON.
-    public init(json: JSON) throws {
-        counterexamples = try json.decodedArray(at: "counterexamples", type: Counterexample.self)
-        pagination = try json.decode(at: "pagination", type: Pagination.self)
+extension CounterexampleCollection: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case counterexamples = "counterexamples"
+        case pagination = "pagination"
+        static let allValues = [counterexamples, pagination]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `CounterexampleCollection` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["counterexamples"] = counterexamples.map { $0.toJSONObject() }
-        json["pagination"] = pagination.toJSONObject()
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        counterexamples = try container.decode([Counterexample].self, forKey: .counterexamples)
+        pagination = try container.decode(Pagination.self, forKey: .pagination)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(counterexamples, forKey: .counterexamples)
+        try container.encode(pagination, forKey: .pagination)
+    }
+
 }

@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** Counterexample. */
-public struct Counterexample: JSONDecodable, JSONEncodable {
+public struct Counterexample {
 
     /// The text of the counterexample.
     public let text: String
@@ -43,22 +43,29 @@ public struct Counterexample: JSONDecodable, JSONEncodable {
         self.created = created
         self.updated = updated
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `Counterexample` model from JSON.
-    public init(json: JSON) throws {
-        text = try json.getString(at: "text")
-        created = try json.getString(at: "created")
-        updated = try json.getString(at: "updated")
+extension Counterexample: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case text = "text"
+        case created = "created"
+        case updated = "updated"
+        static let allValues = [text, created, updated]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `Counterexample` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["text"] = text
-        json["created"] = created
-        json["updated"] = updated
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        text = try container.decode(String.self, forKey: .text)
+        created = try container.decode(String.self, forKey: .created)
+        updated = try container.decode(String.self, forKey: .updated)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(text, forKey: .text)
+        try container.encode(created, forKey: .created)
+        try container.encode(updated, forKey: .updated)
+    }
+
 }

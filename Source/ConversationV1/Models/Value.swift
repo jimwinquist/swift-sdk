@@ -18,13 +18,13 @@ import Foundation
 import RestKit
 
 /** Value. */
-public struct Value: JSONDecodable, JSONEncodable {
+public struct Value {
 
     /// The text of the entity value.
     public let entityValue: String
 
     /// Any metadata related to the entity value.
-    public let metadata: [String: Any]?
+    public let metadata: [String: JSONValue]?
 
     /// The timestamp for creation of the entity value.
     public let created: String
@@ -42,30 +42,38 @@ public struct Value: JSONDecodable, JSONEncodable {
 
      - returns: An initialized `Value`.
     */
-    public init(entityValue: String, created: String, updated: String, metadata: [String: Any]? = nil) {
+    public init(entityValue: String, created: String, updated: String, metadata: [String: JSONValue]? = nil) {
         self.entityValue = entityValue
         self.created = created
         self.updated = updated
         self.metadata = metadata
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `Value` model from JSON.
-    public init(json: JSON) throws {
-        entityValue = try json.getString(at: "value")
-        metadata = try? json.getDictionaryObject(at: "metadata")
-        created = try json.getString(at: "created")
-        updated = try json.getString(at: "updated")
+extension Value: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case entityValue = "value"
+        case metadata = "metadata"
+        case created = "created"
+        case updated = "updated"
+        static let allValues = [entityValue, metadata, created, updated]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `Value` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["value"] = entityValue
-        json["created"] = created
-        json["updated"] = updated
-        if let metadata = metadata { json["metadata"] = metadata }
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        entityValue = try container.decode(String.self, forKey: .entityValue)
+        metadata = try container.decodeIfPresent([String: JSONValue].self, forKey: .metadata)
+        created = try container.decode(String.self, forKey: .created)
+        updated = try container.decode(String.self, forKey: .updated)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(entityValue, forKey: .entityValue)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
+        try container.encode(created, forKey: .created)
+        try container.encode(updated, forKey: .updated)
+    }
+
 }

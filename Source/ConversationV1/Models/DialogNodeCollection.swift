@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** DialogNodeCollection. */
-public struct DialogNodeCollection: JSONDecodable, JSONEncodable {
+public struct DialogNodeCollection {
 
     public let dialogNodes: [DialogNode]
 
@@ -37,20 +37,26 @@ public struct DialogNodeCollection: JSONDecodable, JSONEncodable {
         self.dialogNodes = dialogNodes
         self.pagination = pagination
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `DialogNodeCollection` model from JSON.
-    public init(json: JSON) throws {
-        dialogNodes = try json.decodedArray(at: "dialog_nodes", type: DialogNode.self)
-        pagination = try json.decode(at: "pagination", type: Pagination.self)
+extension DialogNodeCollection: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case dialogNodes = "dialog_nodes"
+        case pagination = "pagination"
+        static let allValues = [dialogNodes, pagination]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `DialogNodeCollection` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["dialog_nodes"] = dialogNodes.map { $0.toJSONObject() }
-        json["pagination"] = pagination.toJSONObject()
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        dialogNodes = try container.decode([DialogNode].self, forKey: .dialogNodes)
+        pagination = try container.decode(Pagination.self, forKey: .pagination)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(dialogNodes, forKey: .dialogNodes)
+        try container.encode(pagination, forKey: .pagination)
+    }
+
 }

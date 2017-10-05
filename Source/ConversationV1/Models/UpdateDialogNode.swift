@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** UpdateDialogNode. */
-public struct UpdateDialogNode: JSONDecodable, JSONEncodable {
+public struct UpdateDialogNode {
 
     /// How the node is processed.
     public enum NodeType: String {
@@ -57,13 +57,13 @@ public struct UpdateDialogNode: JSONDecodable, JSONEncodable {
     public let previousSibling: String?
 
     /// The output of the dialog node.
-    public let output: [String: Any]?
+    public let output: [String: JSONValue]?
 
     /// The context for the dialog node.
-    public let context: [String: Any]?
+    public let context: [String: JSONValue]?
 
     /// The metadata for the dialog node.
-    public let metadata: [String: Any]?
+    public let metadata: [String: JSONValue]?
 
     /// The next step to execute following this dialog node.
     public let nextStep: DialogNodeNextStep?
@@ -103,7 +103,7 @@ public struct UpdateDialogNode: JSONDecodable, JSONEncodable {
 
      - returns: An initialized `UpdateDialogNode`.
     */
-    public init(dialogNode: String, description: String? = nil, conditions: String? = nil, parent: String? = nil, previousSibling: String? = nil, output: [String: Any]? = nil, context: [String: Any]? = nil, metadata: [String: Any]? = nil, nextStep: DialogNodeNextStep? = nil, title: String? = nil, nodeType: String? = nil, eventName: String? = nil, variable: String? = nil, actions: [DialogNodeAction]? = nil) {
+    public init(dialogNode: String, description: String? = nil, conditions: String? = nil, parent: String? = nil, previousSibling: String? = nil, output: [String: JSONValue]? = nil, context: [String: JSONValue]? = nil, metadata: [String: JSONValue]? = nil, nextStep: DialogNodeNextStep? = nil, title: String? = nil, nodeType: String? = nil, eventName: String? = nil, variable: String? = nil, actions: [DialogNodeAction]? = nil) {
         self.dialogNode = dialogNode
         self.description = description
         self.conditions = conditions
@@ -119,46 +119,62 @@ public struct UpdateDialogNode: JSONDecodable, JSONEncodable {
         self.variable = variable
         self.actions = actions
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `UpdateDialogNode` model from JSON.
-    public init(json: JSON) throws {
-        dialogNode = try json.getString(at: "dialog_node")
-        description = try? json.getString(at: "description")
-        conditions = try? json.getString(at: "conditions")
-        parent = try? json.getString(at: "parent")
-        previousSibling = try? json.getString(at: "previous_sibling")
-        output = try? json.getDictionaryObject(at: "output")
-        context = try? json.getDictionaryObject(at: "context")
-        metadata = try? json.getDictionaryObject(at: "metadata")
-        nextStep = try? json.decode(at: "next_step", type: DialogNodeNextStep.self)
-        title = try? json.getString(at: "title")
-        nodeType = try? json.getString(at: "type")
-        eventName = try? json.getString(at: "event_name")
-        variable = try? json.getString(at: "variable")
-        actions = try? json.decodedArray(at: "actions", type: DialogNodeAction.self)
+extension UpdateDialogNode: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case dialogNode = "dialog_node"
+        case description = "description"
+        case conditions = "conditions"
+        case parent = "parent"
+        case previousSibling = "previous_sibling"
+        case output = "output"
+        case context = "context"
+        case metadata = "metadata"
+        case nextStep = "next_step"
+        case title = "title"
+        case nodeType = "type"
+        case eventName = "event_name"
+        case variable = "variable"
+        case actions = "actions"
+        static let allValues = [dialogNode, description, conditions, parent, previousSibling, output, context, metadata, nextStep, title, nodeType, eventName, variable, actions]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `UpdateDialogNode` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["dialog_node"] = dialogNode
-        if let description = description { json["description"] = description }
-        if let conditions = conditions { json["conditions"] = conditions }
-        if let parent = parent { json["parent"] = parent }
-        if let previousSibling = previousSibling { json["previous_sibling"] = previousSibling }
-        if let output = output { json["output"] = output }
-        if let context = context { json["context"] = context }
-        if let metadata = metadata { json["metadata"] = metadata }
-        if let nextStep = nextStep { json["next_step"] = nextStep.toJSONObject() }
-        if let title = title { json["title"] = title }
-        if let nodeType = nodeType { json["type"] = nodeType }
-        if let eventName = eventName { json["event_name"] = eventName }
-        if let variable = variable { json["variable"] = variable }
-        if let actions = actions {
-            json["actions"] = actions.map { $0.toJSONObject() }
-        }
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        dialogNode = try container.decode(String.self, forKey: .dialogNode)
+        description = try container.decodeIfPresent(String.self, forKey: .description)
+        conditions = try container.decodeIfPresent(String.self, forKey: .conditions)
+        parent = try container.decodeIfPresent(String.self, forKey: .parent)
+        previousSibling = try container.decodeIfPresent(String.self, forKey: .previousSibling)
+        output = try container.decodeIfPresent([String: JSONValue].self, forKey: .output)
+        context = try container.decodeIfPresent([String: JSONValue].self, forKey: .context)
+        metadata = try container.decodeIfPresent([String: JSONValue].self, forKey: .metadata)
+        nextStep = try container.decodeIfPresent(DialogNodeNextStep.self, forKey: .nextStep)
+        title = try container.decodeIfPresent(String.self, forKey: .title)
+        nodeType = try container.decodeIfPresent(String.self, forKey: .nodeType)
+        eventName = try container.decodeIfPresent(String.self, forKey: .eventName)
+        variable = try container.decodeIfPresent(String.self, forKey: .variable)
+        actions = try container.decodeIfPresent([DialogNodeAction].self, forKey: .actions)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(dialogNode, forKey: .dialogNode)
+        try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(conditions, forKey: .conditions)
+        try container.encodeIfPresent(parent, forKey: .parent)
+        try container.encodeIfPresent(previousSibling, forKey: .previousSibling)
+        try container.encodeIfPresent(output, forKey: .output)
+        try container.encodeIfPresent(context, forKey: .context)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
+        try container.encodeIfPresent(nextStep, forKey: .nextStep)
+        try container.encodeIfPresent(title, forKey: .title)
+        try container.encodeIfPresent(nodeType, forKey: .nodeType)
+        try container.encodeIfPresent(eventName, forKey: .eventName)
+        try container.encodeIfPresent(variable, forKey: .variable)
+        try container.encodeIfPresent(actions, forKey: .actions)
+    }
+
 }

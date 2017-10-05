@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** Workspace. */
-public struct Workspace: JSONDecodable, JSONEncodable {
+public struct Workspace {
 
     /// The name of the workspace.
     public let name: String
@@ -39,7 +39,7 @@ public struct Workspace: JSONDecodable, JSONEncodable {
     public let description: String?
 
     /// Any metadata that is required by the workspace.
-    public let metadata: [String: Any]?
+    public let metadata: [String: JSONValue]?
 
     /// Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.
     public let learningOptOut: Bool?
@@ -58,7 +58,7 @@ public struct Workspace: JSONDecodable, JSONEncodable {
 
      - returns: An initialized `Workspace`.
     */
-    public init(name: String, language: String, created: String, updated: String, workspaceID: String, description: String? = nil, metadata: [String: Any]? = nil, learningOptOut: Bool? = nil) {
+    public init(name: String, language: String, created: String, updated: String, workspaceID: String, description: String? = nil, metadata: [String: JSONValue]? = nil, learningOptOut: Bool? = nil) {
         self.name = name
         self.language = language
         self.created = created
@@ -68,32 +68,44 @@ public struct Workspace: JSONDecodable, JSONEncodable {
         self.metadata = metadata
         self.learningOptOut = learningOptOut
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `Workspace` model from JSON.
-    public init(json: JSON) throws {
-        name = try json.getString(at: "name")
-        language = try json.getString(at: "language")
-        created = try json.getString(at: "created")
-        updated = try json.getString(at: "updated")
-        workspaceID = try json.getString(at: "workspace_id")
-        description = try? json.getString(at: "description")
-        metadata = try? json.getDictionaryObject(at: "metadata")
-        learningOptOut = try? json.getBool(at: "learning_opt_out")
+extension Workspace: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case name = "name"
+        case language = "language"
+        case created = "created"
+        case updated = "updated"
+        case workspaceID = "workspace_id"
+        case description = "description"
+        case metadata = "metadata"
+        case learningOptOut = "learning_opt_out"
+        static let allValues = [name, language, created, updated, workspaceID, description, metadata, learningOptOut]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `Workspace` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["name"] = name
-        json["language"] = language
-        json["created"] = created
-        json["updated"] = updated
-        json["workspace_id"] = workspaceID
-        if let description = description { json["description"] = description }
-        if let metadata = metadata { json["metadata"] = metadata }
-        if let learningOptOut = learningOptOut { json["learning_opt_out"] = learningOptOut }
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.decode(String.self, forKey: .name)
+        language = try container.decode(String.self, forKey: .language)
+        created = try container.decode(String.self, forKey: .created)
+        updated = try container.decode(String.self, forKey: .updated)
+        workspaceID = try container.decode(String.self, forKey: .workspaceID)
+        description = try container.decodeIfPresent(String.self, forKey: .description)
+        metadata = try container.decodeIfPresent([String: JSONValue].self, forKey: .metadata)
+        learningOptOut = try container.decodeIfPresent(Bool.self, forKey: .learningOptOut)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(language, forKey: .language)
+        try container.encode(created, forKey: .created)
+        try container.encode(updated, forKey: .updated)
+        try container.encode(workspaceID, forKey: .workspaceID)
+        try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
+        try container.encodeIfPresent(learningOptOut, forKey: .learningOptOut)
+    }
+
 }

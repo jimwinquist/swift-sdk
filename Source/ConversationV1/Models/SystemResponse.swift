@@ -18,20 +18,31 @@ import Foundation
 import RestKit
 
 /** For internal use only. */
-public struct SystemResponse: JSONDecodable, JSONEncodable {
+public struct SystemResponse {
 
-    /// The raw JSON object used to construct this model.
-    public let json: [String: Any]
+    /// Additional properties associated with this model.
+    public let additionalProperties: [String: JSONValue]?
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `SystemResponse` model from JSON.
-    public init(json: JSON) throws {
-        self.json = try json.getDictionaryObject()
+    /**
+     Initialize a `SystemResponse`.
+
+     - returns: An initialized `SystemResponse`.
+    */
+    public init(additionalProperties: [String: JSONValue]? = nil) {
+        self.additionalProperties = additionalProperties
+    }
+}
+
+extension SystemResponse: Codable {
+    
+    public init(from decoder: Decoder) throws {
+        let dynamic = try decoder.container(keyedBy: DynamicKeys.self)
+        additionalProperties = try dynamic.decodeIfPresent([String: JSONValue].self, excluding: [CodingKey]())
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `SystemResponse` model to JSON.
-    public func toJSONObject() -> Any {
-        return json
+    public func encode(to encoder: Encoder) throws {
+        var dynamic = encoder.container(keyedBy: DynamicKeys.self)
+        try dynamic.encodeIfPresent(additionalProperties)
     }
+
 }

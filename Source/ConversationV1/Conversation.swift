@@ -73,9 +73,7 @@ public class Conversation {
         do {
             let json = try JSON(data: data)
             let code = response?.statusCode ?? 400
-            let message = try json.getString(at: "error")
-            let userInfo = [NSLocalizedDescriptionKey: message]
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            return NSError(domain: domain, code: code, userInfo: nil)
         } catch {
             return nil
         }
@@ -96,7 +94,7 @@ public class Conversation {
         success: @escaping (Workspace) -> Void)
     {
         // construct body
-        guard let body = try? properties?.toJSON().serialize() else {
+        guard let body = try? JSONEncoder().encodeIfPresent(properties) else {
             failure?(RestError.serializationError)
             return
         }
@@ -302,7 +300,7 @@ public class Conversation {
         success: @escaping (Workspace) -> Void)
     {
         // construct body
-        guard let body = try? properties?.toJSON().serialize() else {
+        guard let body = try? JSONEncoder().encodeIfPresent(properties) else {
             failure?(RestError.serializationError)
             return
         }
@@ -353,7 +351,7 @@ public class Conversation {
         success: @escaping (MessageResponse) -> Void)
     {
         // construct body
-        guard let body = try? request?.toJSON().serialize() else {
+        guard let body = try? JSONEncoder().encodeIfPresent(request) else {
             failure?(RestError.serializationError)
             return
         }
@@ -411,7 +409,7 @@ public class Conversation {
     {
         // construct body
         let createIntentRequest = CreateIntent(intent: intent, description: description, examples: examples)
-        guard let body = try? createIntentRequest.toJSON().serialize() else {
+        guard let body = try? JSONEncoder().encode(createIntentRequest) else {
             failure?(RestError.serializationError)
             return
         }
@@ -646,7 +644,7 @@ public class Conversation {
     {
         // construct body
         let updateIntentRequest = UpdateIntent(intent: newIntent, description: newDescription, examples: newExamples)
-        guard let body = try? updateIntentRequest.toJSON().serialize() else {
+        guard let body = try? JSONEncoder().encode(updateIntentRequest) else {
             failure?(RestError.serializationError)
             return
         }
@@ -702,7 +700,7 @@ public class Conversation {
     {
         // construct body
         let createExampleRequest = CreateExample(text: text)
-        guard let body = try? createExampleRequest.toJSON().serialize() else {
+        guard let body = try? JSONEncoder().encode(createExampleRequest) else {
             failure?(RestError.serializationError)
             return
         }
@@ -929,7 +927,7 @@ public class Conversation {
     {
         // construct body
         let updateExampleRequest = UpdateExample(text: newText)
-        guard let body = try? updateExampleRequest.toJSON().serialize() else {
+        guard let body = try? JSONEncoder().encode(updateExampleRequest) else {
             failure?(RestError.serializationError)
             return
         }
@@ -982,7 +980,7 @@ public class Conversation {
         success: @escaping (Entity) -> Void)
     {
         // construct body
-        guard let body = try? properties.toJSON().serialize() else {
+        guard let body = try? JSONEncoder().encode(properties) else {
             failure?(RestError.serializationError)
             return
         }
@@ -1212,7 +1210,7 @@ public class Conversation {
         success: @escaping (Entity) -> Void)
     {
         // construct body
-        guard let body = try? properties.toJSON().serialize() else {
+        guard let body = try? JSONEncoder().encode(properties) else {
             failure?(RestError.serializationError)
             return
         }
@@ -1265,14 +1263,14 @@ public class Conversation {
         workspaceID: String,
         entity: String,
         value: String,
-        metadata: [String: Any]? = nil,
+        metadata: [String: JSONValue]? = nil,
         synonyms: [String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Value) -> Void)
     {
         // construct body
         let createValueRequest = CreateValue(value: value, metadata: metadata, synonyms: synonyms)
-        guard let body = try? createValueRequest.toJSON().serialize() else {
+        guard let body = try? JSONEncoder().encode(createValueRequest) else {
             failure?(RestError.serializationError)
             return
         }
@@ -1508,14 +1506,14 @@ public class Conversation {
         entity: String,
         value: String,
         newValue: String? = nil,
-        newMetadata: [String: Any]? = nil,
+        newMetadata: [String: JSONValue]? = nil,
         newSynonyms: [String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Value) -> Void)
     {
         // construct body
         let updateValueRequest = UpdateValue(value: newValue, metadata: newMetadata, synonyms: newSynonyms)
-        guard let body = try? updateValueRequest.toJSON().serialize() else {
+        guard let body = try? JSONEncoder().encode(updateValueRequest) else {
             failure?(RestError.serializationError)
             return
         }
@@ -1573,7 +1571,7 @@ public class Conversation {
     {
         // construct body
         let createSynonymRequest = CreateSynonym(synonym: synonym)
-        guard let body = try? createSynonymRequest.toJSON().serialize() else {
+        guard let body = try? JSONEncoder().encode(createSynonymRequest) else {
             failure?(RestError.serializationError)
             return
         }
@@ -1808,7 +1806,7 @@ public class Conversation {
     {
         // construct body
         let updateSynonymRequest = UpdateSynonym(synonym: newSynonym)
-        guard let body = try? updateSynonymRequest.toJSON().serialize() else {
+        guard let body = try? JSONEncoder().encode(updateSynonymRequest) else {
             failure?(RestError.serializationError)
             return
         }
@@ -1861,7 +1859,7 @@ public class Conversation {
         success: @escaping (DialogNode) -> Void)
     {
         // construct body
-        guard let body = try? properties.toJSON().serialize() else {
+        guard let body = try? JSONEncoder().encode(properties) else {
             failure?(RestError.serializationError)
             return
         }
@@ -2079,7 +2077,7 @@ public class Conversation {
         success: @escaping (DialogNode) -> Void)
     {
         // construct body
-        guard let body = try? properties.toJSON().serialize() else {
+        guard let body = try? JSONEncoder().encode(properties) else {
             failure?(RestError.serializationError)
             return
         }
@@ -2200,7 +2198,7 @@ public class Conversation {
     {
         // construct body
         let createCounterexampleRequest = CreateCounterexample(text: text)
-        guard let body = try? createCounterexampleRequest.toJSON().serialize() else {
+        guard let body = try? JSONEncoder().encode(createCounterexampleRequest) else {
             failure?(RestError.serializationError)
             return
         }
@@ -2419,7 +2417,7 @@ public class Conversation {
     {
         // construct body
         let updateCounterexampleRequest = UpdateCounterexample(text: newText)
-        guard let body = try? updateCounterexampleRequest.toJSON().serialize() else {
+        guard let body = try? JSONEncoder().encode(updateCounterexampleRequest) else {
             failure?(RestError.serializationError)
             return
         }

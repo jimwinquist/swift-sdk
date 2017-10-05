@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** WorkspaceCollection. */
-public struct WorkspaceCollection: JSONDecodable, JSONEncodable {
+public struct WorkspaceCollection {
 
     /// An array of workspaces.
     public let workspaces: [Workspace]
@@ -38,20 +38,26 @@ public struct WorkspaceCollection: JSONDecodable, JSONEncodable {
         self.workspaces = workspaces
         self.pagination = pagination
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `WorkspaceCollection` model from JSON.
-    public init(json: JSON) throws {
-        workspaces = try json.decodedArray(at: "workspaces", type: Workspace.self)
-        pagination = try json.decode(at: "pagination", type: Pagination.self)
+extension WorkspaceCollection: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case workspaces = "workspaces"
+        case pagination = "pagination"
+        static let allValues = [workspaces, pagination]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `WorkspaceCollection` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["workspaces"] = workspaces.map { $0.toJSONObject() }
-        json["pagination"] = pagination.toJSONObject()
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        workspaces = try container.decode([Workspace].self, forKey: .workspaces)
+        pagination = try container.decode(Pagination.self, forKey: .pagination)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(workspaces, forKey: .workspaces)
+        try container.encode(pagination, forKey: .pagination)
+    }
+
 }

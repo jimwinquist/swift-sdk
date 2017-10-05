@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** Synonym. */
-public struct Synonym: JSONDecodable, JSONEncodable {
+public struct Synonym {
 
     /// The text of the synonym.
     public let synonymText: String
@@ -43,22 +43,29 @@ public struct Synonym: JSONDecodable, JSONEncodable {
         self.created = created
         self.updated = updated
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `Synonym` model from JSON.
-    public init(json: JSON) throws {
-        synonymText = try json.getString(at: "synonym")
-        created = try json.getString(at: "created")
-        updated = try json.getString(at: "updated")
+extension Synonym: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case synonymText = "synonym"
+        case created = "created"
+        case updated = "updated"
+        static let allValues = [synonymText, created, updated]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `Synonym` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["synonym"] = synonymText
-        json["created"] = created
-        json["updated"] = updated
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        synonymText = try container.decode(String.self, forKey: .synonymText)
+        created = try container.decode(String.self, forKey: .created)
+        updated = try container.decode(String.self, forKey: .updated)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(synonymText, forKey: .synonymText)
+        try container.encode(created, forKey: .created)
+        try container.encode(updated, forKey: .updated)
+    }
+
 }

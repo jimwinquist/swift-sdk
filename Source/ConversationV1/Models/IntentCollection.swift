@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** IntentCollection. */
-public struct IntentCollection: JSONDecodable, JSONEncodable {
+public struct IntentCollection {
 
     /// An array of intents.
     public let intents: [IntentExport]
@@ -38,20 +38,26 @@ public struct IntentCollection: JSONDecodable, JSONEncodable {
         self.intents = intents
         self.pagination = pagination
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `IntentCollection` model from JSON.
-    public init(json: JSON) throws {
-        intents = try json.decodedArray(at: "intents", type: IntentExport.self)
-        pagination = try json.decode(at: "pagination", type: Pagination.self)
+extension IntentCollection: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case intents = "intents"
+        case pagination = "pagination"
+        static let allValues = [intents, pagination]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `IntentCollection` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["intents"] = intents.map { $0.toJSONObject() }
-        json["pagination"] = pagination.toJSONObject()
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        intents = try container.decode([IntentExport].self, forKey: .intents)
+        pagination = try container.decode(Pagination.self, forKey: .pagination)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(intents, forKey: .intents)
+        try container.encode(pagination, forKey: .pagination)
+    }
+
 }

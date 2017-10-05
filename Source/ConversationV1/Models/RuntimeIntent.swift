@@ -18,10 +18,7 @@ import Foundation
 import RestKit
 
 /** An intent identified in the user input. */
-public struct RuntimeIntent: JSONDecodable, JSONEncodable {
-
-    /// The raw JSON object used to construct this model.
-    public let json: [String: Any]
+public struct RuntimeIntent {
 
     /// The name of the recognized intent.
     public let intent: String
@@ -29,17 +26,46 @@ public struct RuntimeIntent: JSONDecodable, JSONEncodable {
     /// A decimal percentage that represents Watson's confidence in the intent.
     public let confidence: Double
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `RuntimeIntent` model from JSON.
-    public init(json: JSON) throws {
-        self.json = try json.getDictionaryObject()
-        intent = try json.getString(at: "intent")
-        confidence = try json.getDouble(at: "confidence")
+    /// Additional properties associated with this model.
+    public let additionalProperties: [String: JSONValue]?
+
+    /**
+     Initialize a `RuntimeIntent` with member variables.
+
+     - parameter intent: The name of the recognized intent.
+     - parameter confidence: A decimal percentage that represents Watson's confidence in the intent.
+
+     - returns: An initialized `RuntimeIntent`.
+    */
+    public init(intent: String, confidence: Double, additionalProperties: [String: JSONValue]? = nil) {
+        self.intent = intent
+        self.confidence = confidence
+        self.additionalProperties = additionalProperties
+    }
+}
+
+extension RuntimeIntent: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case intent = "intent"
+        case confidence = "confidence"
+        static let allValues = [intent, confidence]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `RuntimeIntent` model to JSON.
-    public func toJSONObject() -> Any {
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let dynamic = try decoder.container(keyedBy: DynamicKeys.self)
+        intent = try container.decode(String.self, forKey: .intent)
+        confidence = try container.decode(Double.self, forKey: .confidence)
+        additionalProperties = try dynamic.decodeIfPresent([String: JSONValue].self, excluding: CodingKeys.allValues)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        var dynamic = encoder.container(keyedBy: DynamicKeys.self)
+        try container.encode(intent, forKey: .intent)
+        try container.encode(confidence, forKey: .confidence)
+        try dynamic.encodeIfPresent(additionalProperties)
+    }
+
 }

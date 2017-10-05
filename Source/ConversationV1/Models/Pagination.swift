@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** The pagination data for the returned objects. */
-public struct Pagination: JSONDecodable, JSONEncodable {
+public struct Pagination {
 
     /// The URL that will return the same page of results.
     public let refreshUrl: String
@@ -48,24 +48,32 @@ public struct Pagination: JSONDecodable, JSONEncodable {
         self.total = total
         self.matched = matched
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `Pagination` model from JSON.
-    public init(json: JSON) throws {
-        refreshUrl = try json.getString(at: "refresh_url")
-        nextUrl = try? json.getString(at: "next_url")
-        total = try? json.getInt(at: "total")
-        matched = try? json.getInt(at: "matched")
+extension Pagination: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case refreshUrl = "refresh_url"
+        case nextUrl = "next_url"
+        case total = "total"
+        case matched = "matched"
+        static let allValues = [refreshUrl, nextUrl, total, matched]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `Pagination` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["refresh_url"] = refreshUrl
-        if let nextUrl = nextUrl { json["next_url"] = nextUrl }
-        if let total = total { json["total"] = total }
-        if let matched = matched { json["matched"] = matched }
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        refreshUrl = try container.decode(String.self, forKey: .refreshUrl)
+        nextUrl = try container.decodeIfPresent(String.self, forKey: .nextUrl)
+        total = try container.decodeIfPresent(Int.self, forKey: .total)
+        matched = try container.decodeIfPresent(Int.self, forKey: .matched)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(refreshUrl, forKey: .refreshUrl)
+        try container.encodeIfPresent(nextUrl, forKey: .nextUrl)
+        try container.encodeIfPresent(total, forKey: .total)
+        try container.encodeIfPresent(matched, forKey: .matched)
+    }
+
 }

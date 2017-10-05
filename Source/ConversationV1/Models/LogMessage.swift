@@ -18,10 +18,7 @@ import Foundation
 import RestKit
 
 /** Log message details. */
-public struct LogMessage: JSONDecodable, JSONEncodable {
-
-    /// The raw JSON object used to construct this model.
-    public let json: [String: Any]
+public struct LogMessage {
 
     /// The severity of the message.
     public enum Level: String {
@@ -36,17 +33,46 @@ public struct LogMessage: JSONDecodable, JSONEncodable {
     /// The text of the message.
     public let msg: String
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `LogMessage` model from JSON.
-    public init(json: JSON) throws {
-        self.json = try json.getDictionaryObject()
-        level = try json.getString(at: "level")
-        msg = try json.getString(at: "msg")
+    /// Additional properties associated with this model.
+    public let additionalProperties: [String: JSONValue]?
+
+    /**
+     Initialize a `LogMessage` with member variables.
+
+     - parameter level: The severity of the message.
+     - parameter msg: The text of the message.
+
+     - returns: An initialized `LogMessage`.
+    */
+    public init(level: String, msg: String, additionalProperties: [String: JSONValue]? = nil) {
+        self.level = level
+        self.msg = msg
+        self.additionalProperties = additionalProperties
+    }
+}
+
+extension LogMessage: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case level = "level"
+        case msg = "msg"
+        static let allValues = [level, msg]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `LogMessage` model to JSON.
-    public func toJSONObject() -> Any {
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let dynamic = try decoder.container(keyedBy: DynamicKeys.self)
+        level = try container.decode(String.self, forKey: .level)
+        msg = try container.decode(String.self, forKey: .msg)
+        additionalProperties = try dynamic.decodeIfPresent([String: JSONValue].self, excluding: CodingKeys.allValues)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        var dynamic = encoder.container(keyedBy: DynamicKeys.self)
+        try container.encode(level, forKey: .level)
+        try container.encode(msg, forKey: .msg)
+        try dynamic.encodeIfPresent(additionalProperties)
+    }
+
 }

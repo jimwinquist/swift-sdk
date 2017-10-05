@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** An input object that includes the input text. */
-public struct MessageInput: JSONDecodable, JSONEncodable {
+public struct MessageInput {
 
     /// The user's input.
     public let text: String?
@@ -33,18 +33,23 @@ public struct MessageInput: JSONDecodable, JSONEncodable {
     public init(text: String? = nil) {
         self.text = text
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `MessageInput` model from JSON.
-    public init(json: JSON) throws {
-        text = try? json.getString(at: "text")
+extension MessageInput: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case text = "text"
+        static let allValues = [text]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `MessageInput` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let text = text { json["text"] = text }
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        text = try container.decodeIfPresent(String.self, forKey: .text)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(text, forKey: .text)
+    }
+
 }

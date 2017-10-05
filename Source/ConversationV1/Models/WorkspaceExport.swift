@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** WorkspaceExport. */
-public struct WorkspaceExport: JSONDecodable, JSONEncodable {
+public struct WorkspaceExport {
 
     /// The current status of the workspace.
     public enum Status: String {
@@ -39,7 +39,7 @@ public struct WorkspaceExport: JSONDecodable, JSONEncodable {
     public let language: String
 
     /// Any metadata that is required by the workspace.
-    public let metadata: [String: Any]
+    public let metadata: [String: JSONValue]
 
     /// The timestamp for creation of the workspace.
     public let created: String
@@ -87,7 +87,7 @@ public struct WorkspaceExport: JSONDecodable, JSONEncodable {
 
      - returns: An initialized `WorkspaceExport`.
     */
-    public init(name: String, description: String, language: String, metadata: [String: Any], created: String, updated: String, workspaceID: String, status: String, learningOptOut: Bool, intents: [IntentExport]? = nil, entities: [EntityExport]? = nil, counterexamples: [Counterexample]? = nil, dialogNodes: [DialogNode]? = nil) {
+    public init(name: String, description: String, language: String, metadata: [String: JSONValue], created: String, updated: String, workspaceID: String, status: String, learningOptOut: Bool, intents: [IntentExport]? = nil, entities: [EntityExport]? = nil, counterexamples: [Counterexample]? = nil, dialogNodes: [DialogNode]? = nil) {
         self.name = name
         self.description = description
         self.language = language
@@ -102,50 +102,59 @@ public struct WorkspaceExport: JSONDecodable, JSONEncodable {
         self.counterexamples = counterexamples
         self.dialogNodes = dialogNodes
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `WorkspaceExport` model from JSON.
-    public init(json: JSON) throws {
-        name = try json.getString(at: "name")
-        description = try json.getString(at: "description")
-        language = try json.getString(at: "language")
-        metadata = try json.getDictionaryObject(at: "metadata")
-        created = try json.getString(at: "created")
-        updated = try json.getString(at: "updated")
-        workspaceID = try json.getString(at: "workspace_id")
-        status = try json.getString(at: "status")
-        learningOptOut = try json.getBool(at: "learning_opt_out")
-        intents = try? json.decodedArray(at: "intents", type: IntentExport.self)
-        entities = try? json.decodedArray(at: "entities", type: EntityExport.self)
-        counterexamples = try? json.decodedArray(at: "counterexamples", type: Counterexample.self)
-        dialogNodes = try? json.decodedArray(at: "dialog_nodes", type: DialogNode.self)
+extension WorkspaceExport: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case name = "name"
+        case description = "description"
+        case language = "language"
+        case metadata = "metadata"
+        case created = "created"
+        case updated = "updated"
+        case workspaceID = "workspace_id"
+        case status = "status"
+        case learningOptOut = "learning_opt_out"
+        case intents = "intents"
+        case entities = "entities"
+        case counterexamples = "counterexamples"
+        case dialogNodes = "dialog_nodes"
+        static let allValues = [name, description, language, metadata, created, updated, workspaceID, status, learningOptOut, intents, entities, counterexamples, dialogNodes]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `WorkspaceExport` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["name"] = name
-        json["description"] = description
-        json["language"] = language
-        json["metadata"] = metadata
-        json["created"] = created
-        json["updated"] = updated
-        json["workspace_id"] = workspaceID
-        json["status"] = status
-        json["learning_opt_out"] = learningOptOut
-        if let intents = intents {
-            json["intents"] = intents.map { $0.toJSONObject() }
-        }
-        if let entities = entities {
-            json["entities"] = entities.map { $0.toJSONObject() }
-        }
-        if let counterexamples = counterexamples {
-            json["counterexamples"] = counterexamples.map { $0.toJSONObject() }
-        }
-        if let dialogNodes = dialogNodes {
-            json["dialog_nodes"] = dialogNodes.map { $0.toJSONObject() }
-        }
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.decode(String.self, forKey: .name)
+        description = try container.decode(String.self, forKey: .description)
+        language = try container.decode(String.self, forKey: .language)
+        metadata = try container.decode([String: JSONValue].self, forKey: .metadata)
+        created = try container.decode(String.self, forKey: .created)
+        updated = try container.decode(String.self, forKey: .updated)
+        workspaceID = try container.decode(String.self, forKey: .workspaceID)
+        status = try container.decode(String.self, forKey: .status)
+        learningOptOut = try container.decode(Bool.self, forKey: .learningOptOut)
+        intents = try container.decodeIfPresent([IntentExport].self, forKey: .intents)
+        entities = try container.decodeIfPresent([EntityExport].self, forKey: .entities)
+        counterexamples = try container.decodeIfPresent([Counterexample].self, forKey: .counterexamples)
+        dialogNodes = try container.decodeIfPresent([DialogNode].self, forKey: .dialogNodes)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(description, forKey: .description)
+        try container.encode(language, forKey: .language)
+        try container.encode(metadata, forKey: .metadata)
+        try container.encode(created, forKey: .created)
+        try container.encode(updated, forKey: .updated)
+        try container.encode(workspaceID, forKey: .workspaceID)
+        try container.encode(status, forKey: .status)
+        try container.encode(learningOptOut, forKey: .learningOptOut)
+        try container.encodeIfPresent(intents, forKey: .intents)
+        try container.encodeIfPresent(entities, forKey: .entities)
+        try container.encodeIfPresent(counterexamples, forKey: .counterexamples)
+        try container.encodeIfPresent(dialogNodes, forKey: .dialogNodes)
+    }
+
 }

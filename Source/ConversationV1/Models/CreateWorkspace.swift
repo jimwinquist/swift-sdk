@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** CreateWorkspace. */
-public struct CreateWorkspace: JSONDecodable, JSONEncodable {
+public struct CreateWorkspace {
 
     /// The name of the workspace.
     public let name: String?
@@ -42,7 +42,7 @@ public struct CreateWorkspace: JSONDecodable, JSONEncodable {
     public let counterexamples: [CreateCounterexample]?
 
     /// Any metadata related to the workspace.
-    public let metadata: [String: Any]?
+    public let metadata: [String: JSONValue]?
 
     /// Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.
     public let learningOptOut: Bool?
@@ -62,7 +62,7 @@ public struct CreateWorkspace: JSONDecodable, JSONEncodable {
 
      - returns: An initialized `CreateWorkspace`.
     */
-    public init(name: String? = nil, description: String? = nil, language: String? = nil, intents: [CreateIntent]? = nil, entities: [CreateEntity]? = nil, dialogNodes: [CreateDialogNode]? = nil, counterexamples: [CreateCounterexample]? = nil, metadata: [String: Any]? = nil, learningOptOut: Bool? = nil) {
+    public init(name: String? = nil, description: String? = nil, language: String? = nil, intents: [CreateIntent]? = nil, entities: [CreateEntity]? = nil, dialogNodes: [CreateDialogNode]? = nil, counterexamples: [CreateCounterexample]? = nil, metadata: [String: JSONValue]? = nil, learningOptOut: Bool? = nil) {
         self.name = name
         self.description = description
         self.language = language
@@ -73,42 +73,47 @@ public struct CreateWorkspace: JSONDecodable, JSONEncodable {
         self.metadata = metadata
         self.learningOptOut = learningOptOut
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `CreateWorkspace` model from JSON.
-    public init(json: JSON) throws {
-        name = try? json.getString(at: "name")
-        description = try? json.getString(at: "description")
-        language = try? json.getString(at: "language")
-        intents = try? json.decodedArray(at: "intents", type: CreateIntent.self)
-        entities = try? json.decodedArray(at: "entities", type: CreateEntity.self)
-        dialogNodes = try? json.decodedArray(at: "dialog_nodes", type: CreateDialogNode.self)
-        counterexamples = try? json.decodedArray(at: "counterexamples", type: CreateCounterexample.self)
-        metadata = try? json.getDictionaryObject(at: "metadata")
-        learningOptOut = try? json.getBool(at: "learning_opt_out")
+extension CreateWorkspace: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case name = "name"
+        case description = "description"
+        case language = "language"
+        case intents = "intents"
+        case entities = "entities"
+        case dialogNodes = "dialog_nodes"
+        case counterexamples = "counterexamples"
+        case metadata = "metadata"
+        case learningOptOut = "learning_opt_out"
+        static let allValues = [name, description, language, intents, entities, dialogNodes, counterexamples, metadata, learningOptOut]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `CreateWorkspace` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let name = name { json["name"] = name }
-        if let description = description { json["description"] = description }
-        if let language = language { json["language"] = language }
-        if let intents = intents {
-            json["intents"] = intents.map { $0.toJSONObject() }
-        }
-        if let entities = entities {
-            json["entities"] = entities.map { $0.toJSONObject() }
-        }
-        if let dialogNodes = dialogNodes {
-            json["dialog_nodes"] = dialogNodes.map { $0.toJSONObject() }
-        }
-        if let counterexamples = counterexamples {
-            json["counterexamples"] = counterexamples.map { $0.toJSONObject() }
-        }
-        if let metadata = metadata { json["metadata"] = metadata }
-        if let learningOptOut = learningOptOut { json["learning_opt_out"] = learningOptOut }
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.decodeIfPresent(String.self, forKey: .name)
+        description = try container.decodeIfPresent(String.self, forKey: .description)
+        language = try container.decodeIfPresent(String.self, forKey: .language)
+        intents = try container.decodeIfPresent([CreateIntent].self, forKey: .intents)
+        entities = try container.decodeIfPresent([CreateEntity].self, forKey: .entities)
+        dialogNodes = try container.decodeIfPresent([CreateDialogNode].self, forKey: .dialogNodes)
+        counterexamples = try container.decodeIfPresent([CreateCounterexample].self, forKey: .counterexamples)
+        metadata = try container.decodeIfPresent([String: JSONValue].self, forKey: .metadata)
+        learningOptOut = try container.decodeIfPresent(Bool.self, forKey: .learningOptOut)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(description, forKey: .description)
+        try container.encodeIfPresent(language, forKey: .language)
+        try container.encodeIfPresent(intents, forKey: .intents)
+        try container.encodeIfPresent(entities, forKey: .entities)
+        try container.encodeIfPresent(dialogNodes, forKey: .dialogNodes)
+        try container.encodeIfPresent(counterexamples, forKey: .counterexamples)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
+        try container.encodeIfPresent(learningOptOut, forKey: .learningOptOut)
+    }
+
 }

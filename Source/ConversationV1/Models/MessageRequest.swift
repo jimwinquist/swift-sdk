@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** A request formatted for the Conversation service. */
-public struct MessageRequest: JSONDecodable, JSONEncodable {
+public struct MessageRequest {
 
     /// An input object that includes the input text.
     public let input: InputData?
@@ -58,32 +58,38 @@ public struct MessageRequest: JSONDecodable, JSONEncodable {
         self.intents = intents
         self.output = output
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `MessageRequest` model from JSON.
-    public init(json: JSON) throws {
-        input = try? json.decode(at: "input", type: InputData.self)
-        alternateIntents = try? json.getBool(at: "alternate_intents")
-        context = try? json.decode(at: "context", type: Context.self)
-        entities = try? json.decodedArray(at: "entities", type: RuntimeEntity.self)
-        intents = try? json.decodedArray(at: "intents", type: RuntimeIntent.self)
-        output = try? json.decode(at: "output", type: OutputData.self)
+extension MessageRequest: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case input = "input"
+        case alternateIntents = "alternate_intents"
+        case context = "context"
+        case entities = "entities"
+        case intents = "intents"
+        case output = "output"
+        static let allValues = [input, alternateIntents, context, entities, intents, output]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `MessageRequest` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        if let input = input { json["input"] = input.toJSONObject() }
-        if let alternateIntents = alternateIntents { json["alternate_intents"] = alternateIntents }
-        if let context = context { json["context"] = context.toJSONObject() }
-        if let entities = entities {
-            json["entities"] = entities.map { $0.toJSONObject() }
-        }
-        if let intents = intents {
-            json["intents"] = intents.map { $0.toJSONObject() }
-        }
-        if let output = output { json["output"] = output.toJSONObject() }
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        input = try container.decodeIfPresent(InputData.self, forKey: .input)
+        alternateIntents = try container.decodeIfPresent(Bool.self, forKey: .alternateIntents)
+        context = try container.decodeIfPresent(Context.self, forKey: .context)
+        entities = try container.decodeIfPresent([RuntimeEntity].self, forKey: .entities)
+        intents = try container.decodeIfPresent([RuntimeIntent].self, forKey: .intents)
+        output = try container.decodeIfPresent(OutputData.self, forKey: .output)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(input, forKey: .input)
+        try container.encodeIfPresent(alternateIntents, forKey: .alternateIntents)
+        try container.encodeIfPresent(context, forKey: .context)
+        try container.encodeIfPresent(entities, forKey: .entities)
+        try container.encodeIfPresent(intents, forKey: .intents)
+        try container.encodeIfPresent(output, forKey: .output)
+    }
+
 }

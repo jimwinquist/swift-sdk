@@ -18,10 +18,7 @@ import Foundation
 import RestKit
 
 /** A term from the request that was identified as an entity. */
-public struct RuntimeEntity: JSONDecodable, JSONEncodable {
-
-    /// The raw JSON object used to construct this model.
-    public let json: [String: Any]
+public struct RuntimeEntity {
 
     /// The recognized entity from a term in the input.
     public let entity: String
@@ -36,22 +33,63 @@ public struct RuntimeEntity: JSONDecodable, JSONEncodable {
     public let confidence: Double?
 
     /// The metadata for the entity.
-    public let metadata: [String: Any]?
+    public let metadata: [String: JSONValue]?
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `RuntimeEntity` model from JSON.
-    public init(json: JSON) throws {
-        self.json = try json.getDictionaryObject()
-        entity = try json.getString(at: "entity")
-        location = try json.decodedArray(at: "location", type: Int.self)
-        value = try json.getString(at: "value")
-        confidence = try? json.getDouble(at: "confidence")
-        metadata = try? json.getDictionaryObject(at: "metadata")
+    /// Additional properties associated with this model.
+    public let additionalProperties: [String: JSONValue]?
+
+    /**
+     Initialize a `RuntimeEntity` with member variables.
+
+     - parameter entity: The recognized entity from a term in the input.
+     - parameter location: Zero-based character offsets that indicate where the entity value begins and ends in the input text.
+     - parameter value: The term in the input text that was recognized.
+     - parameter confidence: A decimal percentage that represents Watson's confidence in the entity.
+     - parameter metadata: The metadata for the entity.
+
+     - returns: An initialized `RuntimeEntity`.
+    */
+    public init(entity: String, location: [Int], value: String, confidence: Double? = nil, metadata: [String: JSONValue]? = nil, additionalProperties: [String: JSONValue]? = nil) {
+        self.entity = entity
+        self.location = location
+        self.value = value
+        self.confidence = confidence
+        self.metadata = metadata
+        self.additionalProperties = additionalProperties
+    }
+}
+
+extension RuntimeEntity: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case entity = "entity"
+        case location = "location"
+        case value = "value"
+        case confidence = "confidence"
+        case metadata = "metadata"
+        static let allValues = [entity, location, value, confidence, metadata]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `RuntimeEntity` model to JSON.
-    public func toJSONObject() -> Any {
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let dynamic = try decoder.container(keyedBy: DynamicKeys.self)
+        entity = try container.decode(String.self, forKey: .entity)
+        location = try container.decode([Int].self, forKey: .location)
+        value = try container.decode(String.self, forKey: .value)
+        confidence = try container.decodeIfPresent(Double.self, forKey: .confidence)
+        metadata = try container.decodeIfPresent([String: JSONValue].self, forKey: .metadata)
+        additionalProperties = try dynamic.decodeIfPresent([String: JSONValue].self, excluding: CodingKeys.allValues)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        var dynamic = encoder.container(keyedBy: DynamicKeys.self)
+        try container.encode(entity, forKey: .entity)
+        try container.encode(location, forKey: .location)
+        try container.encode(value, forKey: .value)
+        try container.encodeIfPresent(confidence, forKey: .confidence)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
+        try dynamic.encodeIfPresent(additionalProperties)
+    }
+
 }

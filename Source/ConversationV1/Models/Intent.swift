@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** Intent. */
-public struct Intent: JSONDecodable, JSONEncodable {
+public struct Intent {
 
     /// The name of the intent.
     public let intentName: String
@@ -48,24 +48,32 @@ public struct Intent: JSONDecodable, JSONEncodable {
         self.updated = updated
         self.description = description
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `Intent` model from JSON.
-    public init(json: JSON) throws {
-        intentName = try json.getString(at: "intent")
-        created = try json.getString(at: "created")
-        updated = try json.getString(at: "updated")
-        description = try? json.getString(at: "description")
+extension Intent: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case intentName = "intent"
+        case created = "created"
+        case updated = "updated"
+        case description = "description"
+        static let allValues = [intentName, created, updated, description]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `Intent` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["intent"] = intentName
-        json["created"] = created
-        json["updated"] = updated
-        if let description = description { json["description"] = description }
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        intentName = try container.decode(String.self, forKey: .intentName)
+        created = try container.decode(String.self, forKey: .created)
+        updated = try container.decode(String.self, forKey: .updated)
+        description = try container.decodeIfPresent(String.self, forKey: .description)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(intentName, forKey: .intentName)
+        try container.encode(created, forKey: .created)
+        try container.encode(updated, forKey: .updated)
+        try container.encodeIfPresent(description, forKey: .description)
+    }
+
 }

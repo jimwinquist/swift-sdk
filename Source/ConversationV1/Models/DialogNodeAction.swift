@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** DialogNodeAction. */
-public struct DialogNodeAction: JSONDecodable, JSONEncodable {
+public struct DialogNodeAction {
 
     /// The type of action to invoke.
     public enum ActionType: String {
@@ -33,7 +33,7 @@ public struct DialogNodeAction: JSONDecodable, JSONEncodable {
     public let actionType: String?
 
     /// A map of key/value pairs to be provided to the action.
-    public let parameters: [String: Any]?
+    public let parameters: [String: JSONValue]?
 
     /// The location in the dialog context where the result of the action is stored.
     public let resultVariable: String
@@ -48,30 +48,38 @@ public struct DialogNodeAction: JSONDecodable, JSONEncodable {
 
      - returns: An initialized `DialogNodeAction`.
     */
-    public init(name: String, resultVariable: String, actionType: String? = nil, parameters: [String: Any]? = nil) {
+    public init(name: String, resultVariable: String, actionType: String? = nil, parameters: [String: JSONValue]? = nil) {
         self.name = name
         self.resultVariable = resultVariable
         self.actionType = actionType
         self.parameters = parameters
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `DialogNodeAction` model from JSON.
-    public init(json: JSON) throws {
-        name = try json.getString(at: "name")
-        actionType = try? json.getString(at: "type")
-        parameters = try? json.getDictionaryObject(at: "parameters")
-        resultVariable = try json.getString(at: "result_variable")
+extension DialogNodeAction: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case name = "name"
+        case actionType = "type"
+        case parameters = "parameters"
+        case resultVariable = "result_variable"
+        static let allValues = [name, actionType, parameters, resultVariable]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `DialogNodeAction` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["name"] = name
-        json["result_variable"] = resultVariable
-        if let actionType = actionType { json["type"] = actionType }
-        if let parameters = parameters { json["parameters"] = parameters }
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.decode(String.self, forKey: .name)
+        actionType = try container.decodeIfPresent(String.self, forKey: .actionType)
+        parameters = try container.decodeIfPresent([String: JSONValue].self, forKey: .parameters)
+        resultVariable = try container.decode(String.self, forKey: .resultVariable)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encodeIfPresent(actionType, forKey: .actionType)
+        try container.encodeIfPresent(parameters, forKey: .parameters)
+        try container.encode(resultVariable, forKey: .resultVariable)
+    }
+
 }

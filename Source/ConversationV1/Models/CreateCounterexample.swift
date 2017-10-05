@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** CreateCounterexample. */
-public struct CreateCounterexample: JSONDecodable, JSONEncodable {
+public struct CreateCounterexample {
 
     /// The text of a user input marked as irrelevant input.
     public let text: String
@@ -33,18 +33,23 @@ public struct CreateCounterexample: JSONDecodable, JSONEncodable {
     public init(text: String) {
         self.text = text
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `CreateCounterexample` model from JSON.
-    public init(json: JSON) throws {
-        text = try json.getString(at: "text")
+extension CreateCounterexample: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case text = "text"
+        static let allValues = [text]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `CreateCounterexample` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["text"] = text
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        text = try container.decode(String.self, forKey: .text)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(text, forKey: .text)
+    }
+
 }

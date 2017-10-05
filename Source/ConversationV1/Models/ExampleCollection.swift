@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** ExampleCollection. */
-public struct ExampleCollection: JSONDecodable, JSONEncodable {
+public struct ExampleCollection {
 
     /// An array of Example objects describing the examples defined for the intent.
     public let examples: [Example]
@@ -38,20 +38,26 @@ public struct ExampleCollection: JSONDecodable, JSONEncodable {
         self.examples = examples
         self.pagination = pagination
     }
+}
 
-    // MARK: JSONDecodable
-    /// Used internally to initialize a `ExampleCollection` model from JSON.
-    public init(json: JSON) throws {
-        examples = try json.decodedArray(at: "examples", type: Example.self)
-        pagination = try json.decode(at: "pagination", type: Pagination.self)
+extension ExampleCollection: Codable {
+
+    private enum CodingKeys: String, CodingKey {
+        case examples = "examples"
+        case pagination = "pagination"
+        static let allValues = [examples, pagination]
     }
 
-    // MARK: JSONEncodable
-    /// Used internally to serialize a `ExampleCollection` model to JSON.
-    public func toJSONObject() -> Any {
-        var json = [String: Any]()
-        json["examples"] = examples.map { $0.toJSONObject() }
-        json["pagination"] = pagination.toJSONObject()
-        return json
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        examples = try container.decode([Example].self, forKey: .examples)
+        pagination = try container.decode(Pagination.self, forKey: .pagination)
     }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(examples, forKey: .examples)
+        try container.encode(pagination, forKey: .pagination)
+    }
+
 }
