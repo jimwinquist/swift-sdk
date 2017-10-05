@@ -17,6 +17,7 @@
 import XCTest
 import Foundation
 import ConversationV1
+import RestKit
 
 class ConversationTests: XCTestCase {
     
@@ -342,9 +343,9 @@ class ConversationTests: XCTestCase {
         let request2 = MessageRequest(input: input2, context: context)
         conversation.message(workspaceID: workspaceID, request: request2, failure: failWithError) {
             response in
-            let reprompt = response.context.json["reprompt"] as? Bool
-            XCTAssertNotNil(reprompt)
-            XCTAssertTrue(reprompt!)
+            guard let additionalProperties = response.context.additionalProperties else { XCTFail(); return }
+            guard case let .boolean(reprompt) = additionalProperties["reprompt"]! else { XCTFail(); return }
+            XCTAssertTrue(reprompt)
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -423,8 +424,7 @@ class ConversationTests: XCTestCase {
         let workspaceName = "swift-sdk-test-workspace"
         let workspaceDescription = "temporary workspace for the swift sdk unit tests"
         let workspaceLanguage = "en"
-        var workspaceMetadata = [String: Any]()
-        workspaceMetadata["testKey"] = "testValue"
+        let workspaceMetadata: [String: JSONValue] = ["testKey": .string("testValue")]
         let intentExample = CreateExample(text: "This is an example of Intent1")
         let workspaceIntent = CreateIntent(intent: "Intent1", description: "description of Intent1", examples: [intentExample])
         let entityValue = CreateValue(value: "Entity1Value", metadata: workspaceMetadata, synonyms: ["Synonym1", "Synonym2"])
@@ -1216,7 +1216,8 @@ class ConversationTests: XCTestCase {
 
         let updatedValueName = "up-" + valueName
 
-        conversation.updateValue(workspaceID: workspaceID, entity: entityName, value: valueName, newValue: updatedValueName, newMetadata: ["oldname": valueName], failure: failWithError) { value in
+        let newMetadata: [String: JSONValue] = ["oldname": .string(valueName)]
+        conversation.updateValue(workspaceID: workspaceID, entity: entityName, value: valueName, newValue: updatedValueName, newMetadata: newMetadata, failure: failWithError) { value in
             XCTAssertEqual(value.entityValue, updatedValueName)
             XCTAssertNotNil(value.created)
             XCTAssertNotNil(value.updated)
