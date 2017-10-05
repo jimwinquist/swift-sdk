@@ -20,7 +20,7 @@ public struct RestRequest {
 
     public static let userAgent: String = {
         let sdk = "watson-apis-swift-sdk"
-        let sdkVersion = "0.17.0"
+        let sdkVersion = "0.18.0"
         
         let operatingSystem: String = {
             #if os(iOS)
@@ -180,6 +180,42 @@ public struct RestRequest {
             completionHandler(dataResponse)
         }
     }
+    
+    public func responseObject<T: Decodable>(
+        responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
+        completionHandler: @escaping (RestResponse<T>) -> Void)
+    {
+        response() { data, response, error in
+            
+            if let error = error ?? responseToError?(response,data) {
+                let result = Result<T>.failure(error)
+                let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+                completionHandler(dataResponse)
+                return
+            }
+            
+            // ensure data is not nil
+            guard let data = data else {
+                let result = Result<T>.failure(RestError.noData)
+                let dataResponse = RestResponse(request: self.request, response: response, data: nil, result: result)
+                completionHandler(dataResponse)
+                return
+            }
+            
+            // parse json object
+            let result: Result<T>
+            do {
+                let object = try JSONDecoder().decode(T.self, from: data)
+                result = .success(object)
+            } catch {
+                result = .failure(error)
+            }
+            
+            // execute callback
+            let dataResponse = RestResponse(request: self.request, response: response, data: data, result: result)
+            completionHandler(dataResponse)
+        }
+    }
 
     public func responseArray<T: JSONDecodable>(
         responseToError: ((HTTPURLResponse?, Data?) -> Error?)? = nil,
@@ -322,12 +358,4 @@ public enum Result<T> {
 public enum Credentials {
     case apiKey
     case basicAuthentication(username: String, password: String)
-}
-
-public enum RestError: Error {
-    case noData
-    case serializationError
-    case encodingError
-    case fileManagerError
-    case invalidFile
 }
